@@ -116,6 +116,8 @@ export default function Hero() {
             onMouseMove={handlePointerMove}
             onMouseLeave={handlePointerLeave}
           >
+            <div className="hero-torso-glow" aria-hidden="true" />
+
             <div className="hero-particles" aria-hidden="true">
               <span style={{ top: "40%", left: "4%", animationDelay: "0s" }} />
               <span style={{ top: "34%", left: "93%", animationDelay: "1.2s" }} />

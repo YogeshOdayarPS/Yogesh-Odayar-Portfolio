@@ -109,8 +109,10 @@
     radial-gradient(ellipse 46% 50% at 45% 56%, black 55%, transparent 92%);
   mask-composite: add;
   -webkit-mask-composite: source-over;
-  filter: brightness(1.08) contrast(1.06) drop-shadow(0 0 14px rgba(91, 127, 255, 0.45))
-    drop-shadow(0 0 34px rgba(155, 107, 255, 0.28)) drop-shadow(0 22px 40px rgba(0, 0, 0, 0.55));
+  /* Neutral depth shadow only - no color tint, so nothing glows onto the
+     hair. Any neon rim light lives in separate elements positioned lower
+     (.hero-torso-glow), well clear of the head. */
+  filter: drop-shadow(0 20px 36px rgba(0, 0, 0, 0.55));
 }
 
 /* Darkens the outer corners (multiply blend, not alpha) so the one patch
@@ -124,11 +126,37 @@
   inset: 0;
   mix-blend-mode: multiply;
   background: radial-gradient(
-    ellipse 52% 60% at 46% 60%,
-    transparent 62%,
+    ellipse 50% 46% at 45% 68%,
+    transparent 60%,
     rgba(5, 7, 14, 0.45) 85%,
     rgba(5, 7, 14, 0.68) 100%
   );
+  /* Without this, the dark fill beyond the ellipse's reach still paints
+     the full rectangular box (radial-gradient's last stop extends to the
+     box corners) - that rectangle was showing up as a visible box against
+     the page background. Clip it to the exact same shape as the image
+     itself so it only ever darkens pixels the photo actually occupies. */
+  mask-image: radial-gradient(ellipse 21% 17% at 39% 17%, black 75%, transparent 100%),
+    radial-gradient(ellipse 46% 50% at 45% 56%, black 55%, transparent 92%);
+  -webkit-mask-image: radial-gradient(ellipse 21% 17% at 39% 17%, black 75%, transparent 100%),
+    radial-gradient(ellipse 46% 50% at 45% 56%, black 55%, transparent 92%);
+  mask-composite: add;
+  -webkit-mask-composite: source-over;
+  pointer-events: none;
+}
+
+/* Soft neon glow confined to the torso/shoulder area - never reaches the
+   head, so it frames the person instead of tinting the hair. */
+.hero-torso-glow {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 6%;
+  top: 46%;
+  z-index: 0;
+  background: radial-gradient(ellipse 65% 80% at 50% 70%, rgba(91, 127, 255, 0.22) 0%, transparent 70%),
+    radial-gradient(ellipse 55% 70% at 30% 85%, rgba(155, 107, 255, 0.16) 0%, transparent 70%);
+  filter: blur(20px);
   pointer-events: none;
 }
 
