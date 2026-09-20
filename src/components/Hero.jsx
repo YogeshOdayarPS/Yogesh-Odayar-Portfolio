@@ -9,7 +9,7 @@ import {
 import { ArrowRight, Download } from "lucide-react";
 import { personal } from "../data/content";
 import { heroShapes } from "../lib/scene3dPresets";
-import heroImage from "../assets/hero-character.webp";
+import heroImage from "../assets/hero-character-glow.webp";
 import "./Hero.css";
 
 const Scene3D = lazy(() => import("./Scene3D"));
@@ -116,9 +116,6 @@ export default function Hero() {
             onMouseMove={handlePointerMove}
             onMouseLeave={handlePointerLeave}
           >
-            <div className="hero-orbit-ring hero-orbit-ring-1" aria-hidden="true" />
-            <div className="hero-orbit-ring hero-orbit-ring-2" aria-hidden="true" />
-
             <div className="hero-portrait-rim-glow" aria-hidden="true" />
 
             <div className="hero-particles" aria-hidden="true">
@@ -143,10 +140,10 @@ export default function Hero() {
             >
               <motion.img
                 src={heroImage}
-                alt="Yogesh Odayar P S at his desk, chin resting on hand, in a cinematic dark-blue developer workspace"
+                alt="Yogesh Odayar P S, chin resting on hand, portrait with holographic neon rings and particles"
                 className="hero-image"
-                width={1100}
-                height={1355}
+                width={710}
+                height={616}
                 fetchPriority="high"
                 animate={
                   prefersReducedMotion
