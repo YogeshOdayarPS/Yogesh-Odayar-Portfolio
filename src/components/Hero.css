@@ -79,7 +79,7 @@
 .hero-frame {
   position: relative;
   z-index: 1;
-  width: min(92%, 420px);
+  width: min(96%, 500px);
   perspective: 900px;
 }
 
@@ -93,18 +93,14 @@
   width: 100%;
   height: auto;
   display: block;
-  mask-image: radial-gradient(
-    ellipse 62% 64% at 50% 46%,
-    black 38%,
-    rgba(0, 0, 0, 0.55) 68%,
-    transparent 100%
-  );
-  -webkit-mask-image: radial-gradient(
-    ellipse 62% 64% at 50% 46%,
-    black 38%,
-    rgba(0, 0, 0, 0.55) 68%,
-    transparent 100%
-  );
+  /* The source photo already has its background removed pixel-by-pixel
+     (real alpha channel, not a CSS approximation). This mask is just a
+     light safety-net vignette for the outer margin - it never reaches
+     into the region where the person/rings actually sit. */
+  mask-image: radial-gradient(ellipse 46% 50% at 45% 55%, black 55%, transparent 92%);
+  -webkit-mask-image: radial-gradient(ellipse 46% 50% at 45% 55%, black 55%, transparent 92%);
+  filter: drop-shadow(0 0 16px rgba(91, 127, 255, 0.5)) drop-shadow(0 0 38px rgba(155, 107, 255, 0.32))
+    drop-shadow(0 22px 40px rgba(0, 0, 0, 0.55));
 }
 
 .hero-screen-glow {
@@ -116,21 +112,6 @@
   background: radial-gradient(circle, rgba(91, 127, 255, 0.55) 0%, transparent 72%);
   filter: blur(18px);
   mix-blend-mode: screen;
-  pointer-events: none;
-}
-
-/* Soft rim glow hugging the masked silhouette, sitting behind the image */
-.hero-portrait-rim-glow {
-  position: absolute;
-  inset: -8%;
-  z-index: 1;
-  background: radial-gradient(
-      ellipse 46% 52% at 46% 38%,
-      rgba(91, 127, 255, 0.4) 0%,
-      transparent 72%
-    ),
-    radial-gradient(ellipse 40% 46% at 58% 46%, rgba(155, 107, 255, 0.28) 0%, transparent 70%);
-  filter: blur(22px);
   pointer-events: none;
 }
 
@@ -242,7 +223,7 @@
   }
 
   .hero-frame {
-    width: min(75%, 320px);
+    width: min(82%, 380px);
   }
 }
 

@@ -9,7 +9,7 @@ import {
 import { ArrowRight, Download } from "lucide-react";
 import { personal } from "../data/content";
 import { heroShapes } from "../lib/scene3dPresets";
-import heroImage from "../assets/hero-character-glow.webp";
+import heroImage from "../assets/hero-character-cutout.webp";
 import "./Hero.css";
 
 const Scene3D = lazy(() => import("./Scene3D"));
@@ -116,8 +116,6 @@ export default function Hero() {
             onMouseMove={handlePointerMove}
             onMouseLeave={handlePointerLeave}
           >
-            <div className="hero-portrait-rim-glow" aria-hidden="true" />
-
             <div className="hero-particles" aria-hidden="true">
               <span style={{ top: "6%", left: "10%", animationDelay: "0s" }} />
               <span style={{ top: "16%", left: "88%", animationDelay: "1.2s" }} />
