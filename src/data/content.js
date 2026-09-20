@@ -155,6 +155,8 @@ export const education = [
   },
 ];
 
+const ACHV_IMG = "/achievements/";
+
 export const achievements = [
   {
     category: "Hackathons",
@@ -163,61 +165,172 @@ export const achievements = [
         title: "STATATHON 2025–26 — Winner",
         description: "MoSPI × MoE — Statistical Data Privacy & Security (ANVIKSHAN)",
         highlight: true,
+        image: ACHV_IMG + "statathonprize.jpeg",
       },
       {
         title: "ChemOvate '26 — Winner",
         description: "St. Joseph's College of Engineering, 2026",
         highlight: true,
+        image: ACHV_IMG + "chemovate.jpeg",
       },
-      { title: "SAIHACK FEST — Winner", description: "2024 & 2025 consecutive wins", highlight: true },
-      { title: "MEDCHAIN", description: "Prathyusha Engineering College" },
-      { title: "BLOCKED — QTUXATHON", description: "Sri Sairam Engineering College" },
-      { title: "CBLOCK", description: "VIT Chennai — 24-hour hackathon" },
-      { title: "Build2Learn", description: "Freshworks, Jul 2025 — 4hr hackathon" },
+      {
+        title: "SAIHACK FEST — Winner",
+        description: "2024 & 2025 consecutive wins",
+        highlight: true,
+        image: ACHV_IMG + "saihack.jpeg",
+      },
+      { title: "MEDCHAIN", description: "Prathyusha Engineering College", image: ACHV_IMG + "PRATHYUSHA.jpeg" },
+      {
+        title: "BLOCKED — QTUXATHON",
+        description: "Sri Sairam Engineering College",
+        image: ACHV_IMG + "qtuxathon.jpeg",
+      },
+      {
+        title: "CBLOCK",
+        description: "VIT Chennai — 24-hour hackathon",
+        image: ACHV_IMG + "vithackathon.jpeg",
+      },
+      {
+        title: "Build2Learn",
+        description: "Freshworks, Jul 2025 — 4hr hackathon",
+        image: ACHV_IMG + "build2gether.jpeg",
+      },
     ],
   },
   {
     category: "Awards",
     items: [
-      { title: "Ideathon SDG Goal 16 — 1st Runner-Up", description: "HydroGuard SkyDefender project", highlight: true },
+      {
+        title: "Ideathon SDG Goal 16 — 1st Runner-Up",
+        description: "HydroGuard SkyDefender project",
+        highlight: true,
+        image: ACHV_IMG + "ideathonwin.jpeg",
+      },
       { title: "Hack4Purpose", description: "Top 100 in India selection", highlight: true },
-      { title: "ADMAD (BIS) — 2nd Prize", description: "Sri Sairam Engineering College" },
-      { title: "TEZAS 2K25 — 1st Place", description: "Technical Quiz, RMK CET" },
-      { title: "ADMAD (BIS) — 1st Place", description: "Sri Sairam Engineering College" },
-      { title: "Xplore'25 — 1st Place", description: "Idea Pitching, Loyola-ICAM" },
-      { title: "Incognito'25 — 1st Place", description: "Echo Pitch, St. Joseph's Institute of Technology" },
-      { title: "Gojan Summit", description: "1st Prize Pitching, 3rd Prize Quiz" },
-      { title: "Technical Quiz — 2nd Place", description: "New Prince Shri Bhavani College" },
-      { title: "CPT Tech Summit — 2nd Prize", description: "SDG Ideathon, MGR Educational & Research Institute" },
+      {
+        title: "ADMAD (BIS) — 2nd Prize",
+        description: "Sri Sairam Engineering College",
+        image: ACHV_IMG + "ADMAD-2ND.png",
+      },
+      {
+        title: "TEZAS 2K25 — 1st Place",
+        description: "Technical Quiz, RMK CET",
+        image: ACHV_IMG + "TEZAS.jpeg",
+      },
+      {
+        title: "ADMAD (BIS) — 1st Place",
+        description: "Sri Sairam Engineering College",
+        image: ACHV_IMG + "ADMAD-1ST.jpeg",
+      },
+      {
+        title: "Xplore'25 — 1st Place",
+        description: "Idea Pitching, Loyola-ICAM",
+        image: ACHV_IMG + "XPLORE.jpeg",
+      },
+      {
+        title: "Incognito'25 — 1st Place",
+        description: "Echo Pitch, St. Joseph's Institute of Technology",
+        image: ACHV_IMG + "INCOGNITO.jpeg",
+      },
+      {
+        title: "Gojan Summit",
+        description: "1st Prize Pitching, 3rd Prize Quiz",
+        image: ACHV_IMG + "GHOJAN.jpeg",
+      },
+      {
+        title: "Technical Quiz — 2nd Place",
+        description: "New Prince Shri Bhavani College",
+        image: ACHV_IMG + "TECHNICAL QUIZ.jpeg",
+      },
+      {
+        title: "CPT Tech Summit — 2nd Prize",
+        description: "SDG Ideathon, MGR Educational & Research Institute",
+        image: ACHV_IMG + "CPT TECH SUMMIT.jpeg",
+      },
     ],
   },
   {
     category: "IEEE & Leadership",
     items: [
-      { title: "GUVI Hackathon Coordinator", description: "IEEE TEMS × HCL GUVI, Oct 2025", highlight: true },
-      { title: "INTEMSTELLAR Coordinator", description: "IEEE TEMS One-Day Symposium, Nov 2025" },
-      { title: "CONNIQXION Coordinator", description: "Online Quiz Event (1st Years), Oct 2024" },
-      { title: "NeoVision 2025 Coordinator", description: "IEEE TEMS, Apr 2025" },
-      { title: "Winspire 1.0 Organiser", description: "Panel host, IEEE TEMS, Feb 2025" },
+      {
+        title: "GUVI Hackathon Coordinator",
+        description: "IEEE TEMS × HCL GUVI, Oct 2025",
+        highlight: true,
+        image: ACHV_IMG + "GUVI.jpeg",
+      },
+      {
+        title: "INTEMSTELLAR Coordinator",
+        description: "IEEE TEMS One-Day Symposium, Nov 2025",
+        image: ACHV_IMG + "INTEMSTELLAR.jpeg",
+      },
+      {
+        title: "CONNIQXION Coordinator",
+        description: "Online Quiz Event (1st Years), Oct 2024",
+        image: ACHV_IMG + "connixqion.jpeg",
+      },
+      {
+        title: "NeoVision 2025 Coordinator",
+        description: "IEEE TEMS, Apr 2025",
+        image: ACHV_IMG + "neovision.jpeg",
+      },
+      {
+        title: "Winspire 1.0 Organiser",
+        description: "Panel host, IEEE TEMS, Feb 2025",
+        image: ACHV_IMG + "winspire organiser.jpeg",
+      },
     ],
   },
   {
     category: "Events",
     items: [
-      { title: "Winspire 1.0 — Panelist Speaker", description: "March 2025", highlight: true },
-      { title: "Cognizant SPIN Event", description: "Volunteer, Nov 2025" },
-      { title: "FESTX 2024", description: "CSBS Symposium — Sathura Event" },
-      { title: "FESTX 2025", description: "CSBS Symposium — UnlockX Event" },
-      { title: "Ascendra — 3rd Anniversary", description: "IEEE TEMS, Oct 2024" },
-      { title: "Blockchain BootCamp", description: "IEEE TEMS, Apr 2025" },
-      { title: "B2B Event", description: "IEEE TEMS, May 2025" },
-      { title: "Ascendra — 4th Anniversary", description: "IEEE TEMS, Nov 2025" },
+      {
+        title: "Winspire 1.0 — Panelist Speaker",
+        description: "March 2025",
+        highlight: true,
+        image: ACHV_IMG + "winspirepanelist.jpeg",
+      },
+      {
+        title: "Cognizant SPIN Event",
+        description: "Volunteer, Nov 2025",
+        image: ACHV_IMG + "cognizant spin.jpeg",
+      },
+      {
+        title: "FESTX 2024",
+        description: "CSBS Symposium — Sathura Event",
+        image: ACHV_IMG + "festx2024.jpeg",
+      },
+      {
+        title: "FESTX 2025",
+        description: "CSBS Symposium — UnlockX Event",
+        image: ACHV_IMG + "festx2026.jpg",
+      },
+      {
+        title: "Ascendra — 3rd Anniversary",
+        description: "IEEE TEMS, Oct 2024",
+        image: ACHV_IMG + "ascendra3rd.jpeg",
+      },
+      {
+        title: "Blockchain BootCamp",
+        description: "IEEE TEMS, Apr 2025",
+        image: ACHV_IMG + "blockchain bootcamp.jpeg",
+      },
+      { title: "B2B Event", description: "IEEE TEMS, May 2025", image: ACHV_IMG + "b2b.jpeg" },
+      {
+        title: "Ascendra — 4th Anniversary",
+        description: "IEEE TEMS, Nov 2025",
+        image: ACHV_IMG + "ascendra4th.jpeg",
+      },
     ],
   },
   {
     category: "Presentations",
     items: [
-      { title: "Phoenix'25 — 1st Prize", description: "Paper Presentation, SRM IST Ramapuram", highlight: true },
+      {
+        title: "Phoenix'25 — 1st Prize",
+        description: "Paper Presentation, SRM IST Ramapuram",
+        highlight: true,
+        image: ACHV_IMG + "pheonix.jpeg",
+      },
     ],
   },
 ];

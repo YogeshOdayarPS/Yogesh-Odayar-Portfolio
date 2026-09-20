@@ -64,10 +64,25 @@ export default function Achievements() {
                 key={item.title + i}
                 className={`glass-card achv-static-card ${item.highlight ? "highlight" : ""}`}
               >
-                {item.highlight && <Trophy size={16} className="achv-card-icon" />}
-                <span className="achv-card-category">{item.category}</span>
-                <h4 className="achv-card-title">{item.title}</h4>
-                <p className="achv-card-description">{item.description}</p>
+                {item.image ? (
+                  <div className="achv-card-image-wrap">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="achv-card-image"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    {item.highlight && <Trophy size={16} className="achv-card-icon" />}
+                  </div>
+                ) : (
+                  item.highlight && <Trophy size={16} className="achv-card-icon achv-card-icon-noimg" />
+                )}
+                <div className="achv-card-body">
+                  <span className="achv-card-category">{item.category}</span>
+                  <h4 className="achv-card-title">{item.title}</h4>
+                  <p className="achv-card-description">{item.description}</p>
+                </div>
               </div>
             ))}
           </div>
