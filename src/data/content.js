@@ -109,7 +109,6 @@ export const projects = [
     link: "https://block-ed.netlify.app/",
     details:
       "A blockchain-based course learning platform enabling secure, verifiable, and personalized learning certifications using smart contracts and decentralized storage.",
-    featured: true,
   },
   {
     id: "cblock",
@@ -120,7 +119,6 @@ export const projects = [
     link: "https://cblock.vercel.app/",
     details:
       "Decentralized carbon credit trading platform ensuring transparent issuance, verification, and trading of carbon credits. Cleared all internal SIH hackathon levels and submitted under AICTE student innovation.",
-    featured: true,
   },
   {
     id: "hydroguard",
