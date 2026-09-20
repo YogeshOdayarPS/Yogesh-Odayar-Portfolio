@@ -17,8 +17,6 @@ export default function AchievementCard({ item, index, total, scrollProgress, sp
   const scale = useTransform(localT, [0, 0.15, 0.5, 0.85, 1], [0.5, 0.72, 1, 0.72, 0.5]);
   const rotateY = useTransform(localT, [0, 0.5, 1], isMobile ? [10, 0, -10] : [30, 0, -30]);
   const opacity = useTransform(localT, [0, 0.1, 0.5, 0.9, 1], [0, 1, 1, 1, 0]);
-  const blurAmount = useTransform(localT, [0, 0.5, 1], [5, 0, 5]);
-  const filter = useTransform(blurAmount, (v) => `blur(${v.toFixed(1)}px)`);
 
   return (
     <motion.div
@@ -29,7 +27,6 @@ export default function AchievementCard({ item, index, total, scrollProgress, sp
         scale,
         rotateY,
         opacity,
-        filter,
       }}
     >
       {item.image ? (
