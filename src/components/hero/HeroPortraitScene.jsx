@@ -37,14 +37,14 @@ function Portrait({ texture, floatEnabled }) {
   );
 }
 
-function OrbitRing({ radius, tilt, speed, color, opacity, thickness = 0.014, direction = 1 }) {
+function OrbitRing({ radius, tilt, speed, color, opacity, thickness = 0.014, direction = 1, yOffset = 0 }) {
   const ref = useRef(null);
   useFrame((_, delta) => {
     if (!ref.current) return;
     ref.current.rotation.z += delta * speed * direction;
   });
   return (
-    <mesh ref={ref} rotation={[tilt, 0, 0]}>
+    <mesh ref={ref} position={[0, yOffset, 0]} rotation={[tilt, 0, 0]}>
       <torusGeometry args={[radius, thickness, 10, 96]} />
       <meshBasicMaterial color={color} transparent opacity={opacity} toneMapped={false} />
     </mesh>
@@ -68,8 +68,8 @@ function SceneContent({ texture, reducedMotion }) {
   return (
     <ParallaxRig intensity={0.09} enabled={!reducedMotion}>
       <Portrait texture={texture} floatEnabled={!reducedMotion} />
-      <OrbitRing radius={2.0} tilt={1.4} speed={0.22} color="#5b7fff" opacity={0.55} direction={1} />
-      <OrbitRing radius={2.3} tilt={1.35} speed={0.16} color="#9b6bff" opacity={0.4} direction={-1} />
+      <OrbitRing radius={2.0} tilt={1.4} speed={0.22} color="#5b7fff" opacity={0.55} direction={1} yOffset={-0.55} />
+      <OrbitRing radius={2.3} tilt={1.35} speed={0.16} color="#9b6bff" opacity={0.4} direction={-1} yOffset={-0.62} />
     </ParallaxRig>
   );
 }
