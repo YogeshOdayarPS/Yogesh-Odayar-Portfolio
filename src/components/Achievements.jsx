@@ -2,12 +2,13 @@ import { useMemo, useRef, useState, lazy, Suspense } from "react";
 import { useScroll, useReducedMotion } from "framer-motion";
 import { Trophy } from "lucide-react";
 import { achievements } from "../data/content";
-import DNAStatic from "./achievements/DNAStatic";
+import GlobeStatic from "./achievements/GlobeStatic";
 import AchievementCard from "./achievements/AchievementCard";
 import useIsMobile from "./achievements/useIsMobile";
 import "./Achievements.css";
 
-const DNAScene = lazy(() => import("./achievements/DNAScene"));
+const Globe = lazy(() => import("./achievements/Globe"));
+const QUOTE = "My Goal is not to be better than anyone else, but to be better then I used to be";
 
 export default function Achievements() {
   const prefersReducedMotion = useReducedMotion();
@@ -42,8 +43,8 @@ export default function Achievements() {
           <span className="section-eyebrow">Achievements</span>
           <h2 className="section-title">Hackathons, awards &amp; leadership</h2>
 
-          <div className="achv-static-dna">
-            <DNAStatic />
+          <div className="achv-static-globe-wrap">
+            <GlobeStatic />
           </div>
 
           <div className="achievements-filters">
@@ -121,8 +122,12 @@ export default function Achievements() {
 
         <div className="achv-stage">
           <Suspense fallback={null}>
-            <DNAScene quality={isMobile ? "low" : "high"} />
+            <Globe quality={isMobile ? "low" : "high"} scrollProgress={scrollYProgress} />
           </Suspense>
+
+          <p className="achv-globe-quote" aria-hidden="true">
+            &ldquo;{QUOTE}&rdquo;
+          </p>
 
           <div className="achv-cards-layer">
             {items.map((item, i) => (
