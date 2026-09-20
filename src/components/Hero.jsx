@@ -2,10 +2,8 @@ import { lazy, Suspense } from "react";
 import { motion, useMotionValue, useSpring, useTransform, useReducedMotion } from "framer-motion";
 import { ArrowRight, Download } from "lucide-react";
 import { personal } from "../data/content";
-import { heroShapes } from "../lib/scene3dPresets";
 import "./Hero.css";
 
-const Scene3D = lazy(() => import("./Scene3D"));
 const HeroPortraitScene = lazy(() => import("./hero/HeroPortraitScene"));
 
 const copyContainer = {
@@ -49,10 +47,6 @@ export default function Hero() {
 
   return (
     <section id="home" className="hero">
-      <Suspense fallback={null}>
-        <Scene3D shapes={heroShapes} className="hero-scene3d" />
-      </Suspense>
-
       <div className="container hero-grid">
         <motion.div
           className="hero-copy"

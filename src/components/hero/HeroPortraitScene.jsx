@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useRef, useState } from "react";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { useEffect, useRef, useState } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { useReducedMotion } from "framer-motion";
 import portraitTexUrl from "../../assets/hero-portrait-3d.webp";
@@ -51,43 +51,6 @@ function OrbitRing({ radius, tilt, speed, color, opacity, thickness = 0.014, dir
   );
 }
 
-function AmbientParticles({ count = 60 }) {
-  const ref = useRef(null);
-  const positions = useMemo(() => {
-    const arr = new Float32Array(count * 3);
-    for (let i = 0; i < count; i++) {
-      const angle = Math.random() * Math.PI * 2;
-      const r = 1.9 + Math.random() * 2.0;
-      arr[i * 3] = Math.cos(angle) * r;
-      arr[i * 3 + 1] = (Math.random() - 0.5) * 4.2;
-      arr[i * 3 + 2] = Math.sin(angle) * r * 0.6 - 0.5;
-    }
-    return arr;
-  }, [count]);
-
-  useFrame((_, delta) => {
-    if (!ref.current) return;
-    ref.current.rotation.y += delta * 0.015;
-  });
-
-  return (
-    <points ref={ref}>
-      <bufferGeometry>
-        <bufferAttribute attach="attributes-position" count={count} array={positions} itemSize={3} />
-      </bufferGeometry>
-      <pointsMaterial
-        size={0.028}
-        color="#8fd8ff"
-        transparent
-        opacity={0.55}
-        sizeAttenuation
-        depthWrite={false}
-        blending={THREE.AdditiveBlending}
-      />
-    </points>
-  );
-}
-
 function ParallaxRig({ children, intensity, enabled }) {
   const groupRef = useRef(null);
   useFrame((state) => {
@@ -107,7 +70,6 @@ function SceneContent({ texture, reducedMotion }) {
       <Portrait texture={texture} floatEnabled={!reducedMotion} />
       <OrbitRing radius={2.0} tilt={1.4} speed={0.22} color="#5b7fff" opacity={0.55} direction={1} />
       <OrbitRing radius={2.3} tilt={1.35} speed={0.16} color="#9b6bff" opacity={0.4} direction={-1} />
-      <AmbientParticles />
     </ParallaxRig>
   );
 }
