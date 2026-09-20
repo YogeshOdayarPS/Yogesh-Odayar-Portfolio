@@ -95,12 +95,41 @@
   display: block;
   /* The source photo already has its background removed pixel-by-pixel
      (real alpha channel, not a CSS approximation). This mask is just a
-     light safety-net vignette for the outer margin - it never reaches
-     into the region where the person/rings actually sit. */
-  mask-image: radial-gradient(ellipse 46% 50% at 45% 55%, black 55%, transparent 92%);
-  -webkit-mask-image: radial-gradient(ellipse 46% 50% at 45% 55%, black 55%, transparent 92%);
-  filter: drop-shadow(0 0 16px rgba(91, 127, 255, 0.5)) drop-shadow(0 0 38px rgba(155, 107, 255, 0.32))
-    drop-shadow(0 22px 40px rgba(0, 0, 0, 0.55));
+     light safety-net vignette for the outer margin. The ellipse is
+     pushed up and widened so its soft-fade band sits ABOVE the hairline
+     instead of across it - the head/hair stay in the fully-opaque core. */
+  /* Two mask layers, unioned (default mask-composite: add): a small
+     ellipse that fully protects the head/hair (never fades, regardless
+     of what the wider layer below does), plus a tighter body/frame
+     ellipse that aggressively fades the outer corners to hide the one
+     background patch the pixel cutout couldn't cleanly separate. */
+  mask-image: radial-gradient(ellipse 21% 17% at 39% 17%, black 75%, transparent 100%),
+    radial-gradient(ellipse 46% 50% at 45% 56%, black 55%, transparent 92%);
+  -webkit-mask-image: radial-gradient(ellipse 21% 17% at 39% 17%, black 75%, transparent 100%),
+    radial-gradient(ellipse 46% 50% at 45% 56%, black 55%, transparent 92%);
+  mask-composite: add;
+  -webkit-mask-composite: source-over;
+  filter: brightness(1.08) contrast(1.06) drop-shadow(0 0 14px rgba(91, 127, 255, 0.45))
+    drop-shadow(0 0 34px rgba(155, 107, 255, 0.28)) drop-shadow(0 22px 40px rgba(0, 0, 0, 0.55));
+}
+
+/* Darkens the outer corners (multiply blend, not alpha) so the one patch
+   of background the pixel-level cutout couldn't cleanly separate from the
+   hoodie silhouette sinks into the page tone instead of reading as a
+   visible shape. Bright/saturated content (rings, skin) barely darkens
+   under multiply, so it stays fully visible - only the flat dark leftover
+   is suppressed. Never touches the hair/face core region. */
+.hero-portrait-edge-dim {
+  position: absolute;
+  inset: 0;
+  mix-blend-mode: multiply;
+  background: radial-gradient(
+    ellipse 52% 60% at 46% 60%,
+    transparent 62%,
+    rgba(5, 7, 14, 0.45) 85%,
+    rgba(5, 7, 14, 0.68) 100%
+  );
+  pointer-events: none;
 }
 
 .hero-screen-glow {

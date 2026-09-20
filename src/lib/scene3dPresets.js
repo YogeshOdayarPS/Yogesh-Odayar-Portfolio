@@ -1,6 +1,5 @@
 export const heroShapes = [
   { geometry: "icosahedron", position: [-2.6, 3.2, -2.5], size: 0.8, speed: 0.05, color: "#5b7fff", opacity: 0.3 },
-  { geometry: "torus", position: [4.4, 3.4, -3], size: 0.65, speed: 0.06, color: "#9b6bff", opacity: 0.26 },
   { geometry: "tetrahedron", position: [0.8, 3.6, -2], size: 0.5, speed: 0.07, color: "#5b7fff", opacity: 0.22 },
 ];
 
