@@ -1,18 +1,12 @@
-import { useRef, lazy, Suspense } from "react";
-import {
-  motion,
-  useMotionValue,
-  useSpring,
-  useTransform,
-  useReducedMotion,
-} from "framer-motion";
+import { lazy, Suspense } from "react";
+import { motion, useMotionValue, useSpring, useTransform, useReducedMotion } from "framer-motion";
 import { ArrowRight, Download } from "lucide-react";
 import { personal } from "../data/content";
 import { heroShapes } from "../lib/scene3dPresets";
-import heroImage from "../assets/hero-character-cutout.webp";
 import "./Hero.css";
 
 const Scene3D = lazy(() => import("./Scene3D"));
+const HeroPortraitScene = lazy(() => import("./hero/HeroPortraitScene"));
 
 const copyContainer = {
   animate: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
@@ -25,7 +19,6 @@ const copyItem = {
 
 export default function Hero() {
   const prefersReducedMotion = useReducedMotion();
-  const frameRef = useRef(null);
 
   const pointerX = useMotionValue(0);
   const pointerY = useMotionValue(0);
@@ -34,16 +27,13 @@ export default function Hero() {
   const springX = useSpring(pointerX, springConfig);
   const springY = useSpring(pointerY, springConfig);
 
-  const rotateX = useTransform(springY, [-0.5, 0.5], [6, -6]);
-  const rotateY = useTransform(springX, [-0.5, 0.5], [-6, 6]);
   const bgShiftX = useTransform(springX, [-0.5, 0.5], [10, -10]);
   const bgShiftY = useTransform(springY, [-0.5, 0.5], [10, -10]);
 
   const handlePointerMove = (event) => {
-    if (prefersReducedMotion || !frameRef.current) return;
-    const rect = frameRef.current.getBoundingClientRect();
-    const x = (event.clientX - rect.left) / rect.width - 0.5;
-    const y = (event.clientY - rect.top) / rect.height - 0.5;
+    if (prefersReducedMotion) return;
+    const x = event.clientX / window.innerWidth - 0.5;
+    const y = event.clientY / window.innerHeight - 0.5;
     pointerX.set(x);
     pointerY.set(y);
   };
@@ -98,6 +88,8 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6 }}
+          onMouseMove={handlePointerMove}
+          onMouseLeave={handlePointerLeave}
         >
           <motion.div
             className="hero-visual-bg"
@@ -108,54 +100,19 @@ export default function Hero() {
             }
           />
 
-          <div
-            ref={frameRef}
+          <motion.div
             className="hero-frame"
-            onMouseMove={handlePointerMove}
-            onMouseLeave={handlePointerLeave}
+            role="img"
+            aria-label="Yogesh Odayar P S, chin resting on hand, rendered as a 3D holographic portrait with orbit rings"
+            initial={{ opacity: 0, scale: 1.08 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
           >
-            <div className="hero-particles" aria-hidden="true">
-              <span style={{ top: "40%", left: "4%", animationDelay: "0s" }} />
-              <span style={{ top: "34%", left: "93%", animationDelay: "1.2s" }} />
-              <span style={{ top: "52%", left: "2%", animationDelay: "2.4s" }} />
-              <span style={{ top: "58%", left: "94%", animationDelay: "0.6s" }} />
-              <span style={{ top: "78%", left: "14%", animationDelay: "1.8s" }} />
-              <span style={{ top: "86%", left: "80%", animationDelay: "3s" }} />
-            </div>
-
-            <motion.div
-              className="hero-image-wrap"
-              style={
-                prefersReducedMotion
-                  ? undefined
-                  : { rotateX, rotateY, transformPerspective: 900 }
-              }
-              initial={{ opacity: 0, scale: 1.12, filter: "blur(14px)" }}
-              animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-              transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
-            >
-              <motion.img
-                src={heroImage}
-                alt="Yogesh Odayar P S, chin resting on hand, portrait with holographic neon rings and particles"
-                className="hero-image"
-                width={710}
-                height={616}
-                fetchPriority="high"
-                animate={
-                  prefersReducedMotion
-                    ? undefined
-                    : { y: [0, -6, 0] }
-                }
-                transition={
-                  prefersReducedMotion
-                    ? undefined
-                    : { duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 1.6 }
-                }
-              />
-            </motion.div>
-
+            <Suspense fallback={null}>
+              <HeroPortraitScene />
+            </Suspense>
             <div className="hero-portrait-platform" aria-hidden="true" />
-          </div>
+          </motion.div>
         </motion.div>
       </div>
 
