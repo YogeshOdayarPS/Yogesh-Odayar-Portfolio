@@ -4,9 +4,51 @@ import * as THREE from "three";
 
 const CORE_RADIUS = 1.6;
 
+// A clean latitude ring (horizontal circle) at a given angle, instead of a
+// dense triangulated wireframe - reads as a real "globe grid" line, not a
+// faceted mesh edge.
+function buildLatitudeRing(radius, latDeg, segments = 64) {
+  const lat = (latDeg * Math.PI) / 180;
+  const y = radius * Math.sin(lat);
+  const r = radius * Math.cos(lat);
+  const pts = [];
+  for (let i = 0; i <= segments; i++) {
+    const a = (i / segments) * Math.PI * 2;
+    pts.push(new THREE.Vector3(r * Math.cos(a), y, r * Math.sin(a)));
+  }
+  return new THREE.BufferGeometry().setFromPoints(pts);
+}
+
+// A clean longitude arc (pole-to-pole half circle) at a given rotation.
+function buildLongitudeArc(radius, lonDeg, segments = 48) {
+  const lon = (lonDeg * Math.PI) / 180;
+  const pts = [];
+  for (let i = 0; i <= segments; i++) {
+    const t = -Math.PI / 2 + (i / segments) * Math.PI;
+    const y = radius * Math.sin(t);
+    const r = radius * Math.cos(t);
+    pts.push(new THREE.Vector3(r * Math.cos(lon), y, r * Math.sin(lon)));
+  }
+  return new THREE.BufferGeometry().setFromPoints(pts);
+}
+
+// Latitude/longitude angles deliberately skip 0deg so no line runs straight
+// through the front-center of the globe, where the quote sits.
+const LATITUDES = { low: [-35, 35], high: [-55, -25, 25, 55] };
+const LONGITUDES = { low: [30, 150, 270], high: [20, 80, 140, 200, 260, 320] };
+
 function HoloGlobe({ scrollProgress, quality }) {
   const groupRef = useRef(null);
-  const segments = quality === "low" ? [14, 10] : [22, 16];
+  const key = quality === "low" ? "low" : "high";
+
+  const latGeometries = useMemo(
+    () => LATITUDES[key].map((deg) => buildLatitudeRing(CORE_RADIUS, deg)),
+    [key]
+  );
+  const lonGeometries = useMemo(
+    () => LONGITUDES[key].map((deg) => buildLongitudeArc(CORE_RADIUS, deg)),
+    [key]
+  );
 
   useFrame((state) => {
     if (!groupRef.current) return;
@@ -22,15 +64,22 @@ function HoloGlobe({ scrollProgress, quality }) {
 
   return (
     <group ref={groupRef}>
-      {/* Wireframe grid shell - the visible "holographic" surface */}
+      {/* Sparse, clean grid lines - the visible "holographic" surface */}
+      {latGeometries.map((geo, i) => (
+        <lineLoop key={`lat-${i}`} geometry={geo}>
+          <lineBasicMaterial color="#5ce1ff" transparent opacity={0.24} />
+        </lineLoop>
+      ))}
+      {lonGeometries.map((geo, i) => (
+        <line key={`lon-${i}`} geometry={geo}>
+          <lineBasicMaterial color="#5ce1ff" transparent opacity={0.24} />
+        </line>
+      ))}
+      {/* Solid dark core so the (now sparse) grid reads as a volume and the
+          quote keeps strong contrast behind it */}
       <mesh>
-        <sphereGeometry args={[CORE_RADIUS, segments[0], segments[1]]} />
-        <meshBasicMaterial color="#5ce1ff" wireframe transparent opacity={0.55} />
-      </mesh>
-      {/* Faint solid core for depth so the wireframe reads as a volume */}
-      <mesh>
-        <sphereGeometry args={[CORE_RADIUS * 0.97, segments[0], segments[1]]} />
-        <meshBasicMaterial color="#0b0f1c" transparent opacity={0.35} />
+        <sphereGeometry args={[CORE_RADIUS * 0.95, 16, 12]} />
+        <meshBasicMaterial color="#0b0f1c" transparent opacity={0.55} />
       </mesh>
       {/* Soft outer glow shell */}
       <mesh>
