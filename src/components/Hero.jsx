@@ -116,6 +116,20 @@ export default function Hero() {
             onMouseMove={handlePointerMove}
             onMouseLeave={handlePointerLeave}
           >
+            <div className="hero-orbit-ring hero-orbit-ring-1" aria-hidden="true" />
+            <div className="hero-orbit-ring hero-orbit-ring-2" aria-hidden="true" />
+
+            <div className="hero-portrait-rim-glow" aria-hidden="true" />
+
+            <div className="hero-particles" aria-hidden="true">
+              <span style={{ top: "6%", left: "10%", animationDelay: "0s" }} />
+              <span style={{ top: "16%", left: "88%", animationDelay: "1.2s" }} />
+              <span style={{ top: "42%", left: "2%", animationDelay: "2.4s" }} />
+              <span style={{ top: "58%", left: "94%", animationDelay: "0.6s" }} />
+              <span style={{ top: "78%", left: "14%", animationDelay: "1.8s" }} />
+              <span style={{ top: "86%", left: "80%", animationDelay: "3s" }} />
+            </div>
+
             <motion.div
               className="hero-image-wrap"
               style={
@@ -166,7 +180,7 @@ export default function Hero() {
               />
             </motion.div>
 
-            <div className="hero-frame-border" />
+            <div className="hero-portrait-platform" aria-hidden="true" />
           </div>
         </motion.div>
       </div>

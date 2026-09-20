@@ -85,22 +85,26 @@
 
 .hero-image-wrap {
   position: relative;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
+  z-index: 2;
   transform-style: preserve-3d;
-  box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.7);
 }
 
 .hero-image {
   width: 100%;
   height: auto;
   display: block;
-  mask-image: linear-gradient(
-    to bottom,
-    black 78%,
-    transparent 100%
+  mask-image: radial-gradient(
+    ellipse 40% 48% at 48% 38%,
+    black 55%,
+    rgba(0, 0, 0, 0.6) 76%,
+    transparent 96%
   );
-  -webkit-mask-image: linear-gradient(to bottom, black 78%, transparent 100%);
+  -webkit-mask-image: radial-gradient(
+    ellipse 40% 48% at 48% 38%,
+    black 55%,
+    rgba(0, 0, 0, 0.6) 76%,
+    transparent 96%
+  );
 }
 
 .hero-screen-glow {
@@ -115,12 +119,104 @@
   pointer-events: none;
 }
 
-.hero-frame-border {
+/* Soft rim glow hugging the masked silhouette, sitting behind the image */
+.hero-portrait-rim-glow {
   position: absolute;
-  inset: -1px;
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--border-strong);
+  inset: -8%;
+  z-index: 1;
+  background: radial-gradient(
+      ellipse 46% 52% at 46% 38%,
+      rgba(91, 127, 255, 0.4) 0%,
+      transparent 72%
+    ),
+    radial-gradient(ellipse 40% 46% at 58% 46%, rgba(155, 107, 255, 0.28) 0%, transparent 70%);
+  filter: blur(22px);
   pointer-events: none;
+}
+
+/* Slowly rotating holographic orbit rings around the portrait */
+.hero-orbit-ring {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  z-index: 1;
+  border-radius: 50%;
+  border: 1px solid rgba(91, 127, 255, 0.4);
+  pointer-events: none;
+}
+
+.hero-orbit-ring-1 {
+  width: 112%;
+  height: 58%;
+  transform: translate(-50%, -50%) rotateX(72deg) rotateZ(0deg);
+  box-shadow: 0 0 26px -4px rgba(91, 127, 255, 0.55);
+  animation: hero-orbit-spin-1 20s linear infinite;
+}
+
+.hero-orbit-ring-2 {
+  width: 128%;
+  height: 68%;
+  border-color: rgba(155, 107, 255, 0.32);
+  transform: translate(-50%, -50%) rotateX(72deg) rotateZ(35deg);
+  box-shadow: 0 0 32px -6px rgba(155, 107, 255, 0.4);
+  animation: hero-orbit-spin-2 28s linear infinite reverse;
+}
+
+@keyframes hero-orbit-spin-1 {
+  from { transform: translate(-50%, -50%) rotateX(72deg) rotateZ(0deg); }
+  to { transform: translate(-50%, -50%) rotateX(72deg) rotateZ(360deg); }
+}
+
+@keyframes hero-orbit-spin-2 {
+  from { transform: translate(-50%, -50%) rotateX(72deg) rotateZ(35deg); }
+  to { transform: translate(-50%, -50%) rotateX(72deg) rotateZ(395deg); }
+}
+
+/* Subtle drifting particles around the frame */
+.hero-particles {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-particles span {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #8fd8ff;
+  box-shadow: 0 0 8px 2px rgba(143, 216, 255, 0.7);
+  opacity: 0;
+  animation: hero-particle-float 6s ease-in-out infinite;
+}
+
+@keyframes hero-particle-float {
+  0%, 100% { opacity: 0; transform: translateY(0); }
+  15%, 85% { opacity: 0.8; }
+  50% { transform: translateY(-14px); }
+}
+
+/* Soft glowing platform beneath the figure */
+.hero-portrait-platform {
+  position: absolute;
+  bottom: 4%;
+  left: 50%;
+  z-index: 0;
+  width: 62%;
+  height: 22px;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse, rgba(91, 127, 255, 0.5) 0%, rgba(91, 127, 255, 0.14) 45%, transparent 75%);
+  filter: blur(6px);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-orbit-ring,
+  .hero-particles span {
+    animation: none;
+  }
 }
 
 .hero-scroll-cue {
