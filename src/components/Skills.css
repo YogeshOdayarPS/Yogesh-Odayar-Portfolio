@@ -1,0 +1,49 @@
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 3.5rem;
+}
+
+.skill-card {
+  padding: 1.5rem;
+}
+
+.skill-card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.certifications-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.certifications-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.certification-card {
+  padding: 1.1rem 1.25rem;
+}
+
+.certification-name {
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.certification-note {
+  color: var(--text-faint);
+  font-size: 0.85rem;
+}

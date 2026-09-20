@@ -1,0 +1,128 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 1.15rem 0;
+  transition: background 0.3s ease, border-color 0.3s ease, padding 0.3s ease;
+  border-bottom: 1px solid transparent;
+}
+
+.navbar-scrolled {
+  background: rgba(5, 7, 14, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom-color: var(--border);
+  padding: 0.8rem 0;
+}
+
+.navbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.navbar-brand {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 1.9rem;
+}
+
+.navbar-link {
+  position: relative;
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-size: 0.92rem;
+  font-weight: 500;
+  padding: 0.35rem 0;
+  transition: color 0.2s ease;
+}
+
+.navbar-link:hover {
+  color: var(--text);
+}
+
+.navbar-link.active {
+  color: var(--text);
+}
+
+.navbar-link-underline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(120deg, var(--accent), var(--accent-2));
+}
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.navbar-resume {
+  padding: 0.55rem 1.2rem;
+  font-size: 0.85rem;
+}
+
+.navbar-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text);
+}
+
+.navbar-mobile {
+  display: none;
+}
+
+@media (max-width: 880px) {
+  .navbar-links {
+    display: none;
+  }
+
+  .navbar-resume {
+    display: none;
+  }
+
+  .navbar-toggle {
+    display: flex;
+  }
+
+  .navbar-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 1rem 1.5rem 1.5rem;
+    background: rgba(5, 7, 14, 0.96);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .navbar-mobile-link {
+    background: none;
+    border: none;
+    text-align: left;
+    padding: 0.75rem 0;
+    font-size: 1rem;
+    color: var(--text-dim);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .navbar-mobile-link.active {
+    color: var(--accent);
+  }
+
+  .navbar-mobile-resume {
+    margin-top: 1rem;
+    justify-content: center;
+  }
+}

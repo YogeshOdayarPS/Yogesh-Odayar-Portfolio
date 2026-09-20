@@ -1,0 +1,68 @@
+.bg-field {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.bg-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.55;
+}
+
+.bg-glow-a {
+  width: 46rem;
+  height: 46rem;
+  top: -18rem;
+  right: -14rem;
+  background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+  animation: drift-a 26s ease-in-out infinite;
+}
+
+.bg-glow-b {
+  width: 38rem;
+  height: 38rem;
+  bottom: -16rem;
+  left: -12rem;
+  background: radial-gradient(circle, var(--accent-2) 0%, transparent 70%);
+  animation: drift-b 30s ease-in-out infinite;
+}
+
+.bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 64px 64px;
+  opacity: 0.06;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, black 40%, transparent 100%);
+}
+
+@keyframes drift-a {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-3rem, 2rem) scale(1.08); }
+}
+
+@keyframes drift-b {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(2.5rem, -2rem) scale(1.05); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-glow-a,
+  .bg-glow-b {
+    animation: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .bg-glow-a,
+  .bg-glow-b {
+    width: 26rem;
+    height: 26rem;
+    filter: blur(60px);
+  }
+}

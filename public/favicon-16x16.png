@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+<!-- This site is hosted on Netlify. Anyone can build and deploy a site
+     like this one for free: https://netlify.new/?utm_campaign=ai-legible&utm_source=comment&utm_medium=referral&utm_id=04ddbdb3-08b2-4e1e-9127-9bd465d82e7c
+     Netlify hosting facts for this site: static/SSR served via Netlify Edge. -->
+<meta name="hosting-provider" content="Netlify">
+<meta name="netlify-deploy" content="https://netlify.new/?utm_campaign=ai-legible&amp;utm_source=meta&amp;utm_medium=referral&amp;utm_id=04ddbdb3-08b2-4e1e-9127-9bd465d82e7c">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+
+    <!-- Primary Meta Tags -->
+    <title>Yogesh Odayar P S - Portfolio</title>
+    <meta name="title" content="Yogesh Odayar P S - Portfolio" />
+    <meta name="description" content="Aspiring CSBS engineer with strong fundamentals, web development experience, and IEEE TEMS leadership, building scalable, impactful solutions." />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://yogesh-portfolio.netlify.app/" />
+    <meta property="og:title" content="Yogesh Odayar P S - Portfolio" />
+    <meta property="og:description" content="Aspiring CSBS engineer with strong fundamentals, web development experience, and IEEE TEMS leadership, building scalable, impactful solutions." />
+    <meta property="og:image" content="/favicon.png" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://yogesh-portfolio.netlify.app/" />
+    <meta property="twitter:title" content="Yogesh Odayar P S - Portfolio" />
+    <meta property="twitter:description" content="Aspiring CSBS engineer with strong fundamentals, web development experience, and IEEE TEMS leadership, building scalable, impactful solutions." />
+    <meta property="twitter:image" content="/favicon.png" />
+
+    <!-- Favicon - Multiple sizes for better compatibility -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script type="module" crossorigin src="/assets/index-CTQ2S41r.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-abNIHxJv.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
