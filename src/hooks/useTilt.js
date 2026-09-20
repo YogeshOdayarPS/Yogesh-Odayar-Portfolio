@@ -28,5 +28,5 @@ export default function useTilt({ strength = 8, spring = { stiffness: 150, dampi
     ? undefined
     : { rotateX, rotateY, transformPerspective: 800 };
 
-  return { ref, onMouseMove, onMouseLeave, tiltStyle, prefersReducedMotion };
+  return { ref, onMouseMove, onMouseLeave, tiltStyle, springX, springY, prefersReducedMotion };
 }

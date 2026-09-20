@@ -8,10 +8,16 @@
 }
 
 .hero-grid {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: 1.05fr 0.95fr;
   align-items: center;
   gap: 2.5rem;
+}
+
+.scene3d-canvas {
+  z-index: 0 !important;
 }
 
 .hero-copy {
@@ -119,6 +125,7 @@
 
 .hero-scroll-cue {
   position: absolute;
+  z-index: 1;
   bottom: 1.5rem;
   left: 50%;
   transform: translateX(-50%);

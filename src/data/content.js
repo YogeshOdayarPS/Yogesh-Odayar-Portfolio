@@ -50,20 +50,29 @@ export const certifications = [
   { title: "IIT Spoken Tutorial — Java, C, CSS, R, Git", note: "Academic Certification" },
 ];
 
-export const experience = {
-  industry: [
-    {
-      role: "Web Developer Intern",
-      company: "Hyundai Motor India Limited",
-      date: "June 2025",
-      problem: "Manual meeting room booking conflicts",
-      solution: "Automated Room Management System",
-      outcome: "Improved coordination & frontend experience",
-      tech: ["HTML", "CSS", "JavaScript"],
-      link: "https://roaring-sprinkles-e7d179.netlify.app/#",
-    },
+export const experience = [
+  {
+    role: "Web Developer Intern",
+    company: "Hyundai Motor India Limited",
+    date: "June 2025",
+    problem: "Manual meeting room booking conflicts",
+    solution: "Automated Room Management System",
+    outcome: "Improved coordination & frontend experience",
+    tech: ["HTML", "CSS", "JavaScript"],
+    link: "https://roaring-sprinkles-e7d179.netlify.app/#",
+  },
+];
+
+export const leadership = {
+  intro:
+    "As Secretary of IEEE TEMS SBC, I've spent three years turning student energy into organized, high-impact events — from technical symposiums to hackathon collaborations with industry partners.",
+  stats: [
+    { label: "IEEE Roles Held", value: "4" },
+    { label: "Years Active", value: "3+" },
+    { label: "Events Coordinated", value: "5" },
+    { label: "Volunteer Drives", value: "8" },
   ],
-  ieee: [
+  roles: [
     { role: "Content Writer", organization: "IEEE TEMS SBC", duration: "2023–2024" },
     { role: "Event Lead", organization: "IEEE TEMS SBC", duration: "2024–2025" },
     { role: "Mastermind", organization: "MAGIC Member, IEEE TEMS SBC", duration: "2024–2025" },
@@ -91,6 +100,7 @@ export const projects = [
     link: "https://block-ed.netlify.app/",
     details:
       "A blockchain-based course learning platform enabling secure, verifiable, and personalized learning certifications using smart contracts and decentralized storage.",
+    featured: true,
   },
   {
     id: "cblock",
@@ -101,6 +111,7 @@ export const projects = [
     link: "https://cblock.vercel.app/",
     details:
       "Decentralized carbon credit trading platform ensuring transparent issuance, verification, and trading of carbon credits. Cleared all internal SIH hackathon levels and submitted under AICTE student innovation.",
+    featured: true,
   },
   {
     id: "hydroguard",
@@ -192,10 +203,12 @@ export const achievements = [
 export const navSections = [
   { id: "home", label: "Home" },
   { id: "about", label: "About" },
-  { id: "skills", label: "Skills" },
   { id: "experience", label: "Experience" },
   { id: "projects", label: "Projects" },
+  { id: "leadership", label: "Leadership" },
   { id: "achievements", label: "Achievements" },
+  { id: "skills", label: "Skills" },
   { id: "education", label: "Education" },
+  { id: "certifications", label: "Certifications" },
   { id: "contact", label: "Contact" },
 ];

@@ -1,9 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ExternalLink, FileText } from "lucide-react";
 import { projects } from "../data/content";
+import { projectsShapes } from "../lib/scene3dPresets";
 import ProjectCard from "./ProjectCard";
+import Reveal from "./Reveal";
 import "./Projects.css";
+
+const Scene3D = lazy(() => import("./Scene3D"));
 
 export default function Projects() {
   const [active, setActive] = useState(null);
@@ -19,16 +23,15 @@ export default function Projects() {
 
   return (
     <section id="projects" className="section projects-section">
+      <Suspense fallback={null}>
+        <Scene3D shapes={projectsShapes} followPointer={false} className="projects-scene3d" />
+      </Suspense>
+
       <div className="container">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6 }}
-        >
+        <Reveal>
           <span className="section-eyebrow">Projects</span>
           <h2 className="section-title">Things I've built</h2>
-        </motion.div>
+        </Reveal>
 
         <div className="projects-grid">
           {projects.map((project) => (

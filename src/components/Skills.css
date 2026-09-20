@@ -2,7 +2,6 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1.25rem;
-  margin-bottom: 3.5rem;
 }
 
 .skill-card {
@@ -22,28 +21,12 @@
   gap: 0.5rem;
 }
 
-.certifications-title {
-  font-size: 1.3rem;
-  font-weight: 600;
-  margin-bottom: 1.5rem;
+.skill-tag {
+  transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
-.certifications-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1rem;
-}
-
-.certification-card {
-  padding: 1.1rem 1.25rem;
-}
-
-.certification-name {
-  font-weight: 600;
-  margin-bottom: 0.3rem;
-}
-
-.certification-note {
-  color: var(--text-faint);
-  font-size: 0.85rem;
+.skill-tag:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  color: var(--text);
 }

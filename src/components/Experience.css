@@ -1,37 +1,53 @@
-.experience-tabs {
-  display: flex;
-  gap: 0.75rem;
-  margin-bottom: 2.5rem;
-}
-
-.experience-tab {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.65rem 1.3rem;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--text-dim);
-  font-weight: 500;
-  font-size: 0.9rem;
-  transition: all 0.25s ease;
-}
-
-.experience-tab.active {
-  color: #fff;
-  background: linear-gradient(120deg, var(--accent), var(--accent-2));
-  border-color: transparent;
-}
-
 .timeline {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 2rem;
+  padding-left: 2.5rem;
+}
+
+.timeline-track {
+  position: absolute;
+  left: 5px;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  background: var(--border);
+  border-radius: 2px;
+}
+
+.timeline-track-fill {
+  width: 100%;
+  height: 100%;
+  transform-origin: top;
+  background: linear-gradient(180deg, var(--accent), var(--accent-2));
+  border-radius: 2px;
+}
+
+.timeline-row {
+  position: relative;
+}
+
+.timeline-marker {
+  position: absolute;
+  left: -2.5rem;
+  top: 0.4rem;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-soft);
 }
 
 .timeline-card {
   padding: 1.75rem;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.timeline-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--border-strong);
+  box-shadow: 0 16px 40px -24px var(--accent-glow);
 }
 
 .timeline-date {
@@ -80,14 +96,4 @@
   color: var(--accent);
   font-weight: 600;
   font-size: 0.9rem;
-}
-
-.ieee-timeline {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.1rem;
-}
-
-.ieee-card {
-  padding: 1.5rem;
 }

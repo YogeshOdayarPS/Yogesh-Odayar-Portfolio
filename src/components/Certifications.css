@@ -1,0 +1,24 @@
+.certifications-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.certification-card {
+  padding: 1.35rem 1.5rem;
+}
+
+.certification-icon {
+  color: var(--accent);
+  margin-bottom: 0.6rem;
+}
+
+.certification-name {
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.certification-note {
+  color: var(--text-faint);
+  font-size: 0.85rem;
+}

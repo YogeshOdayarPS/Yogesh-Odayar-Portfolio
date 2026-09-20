@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, lazy, Suspense } from "react";
 import {
   motion,
   useMotionValue,
@@ -8,8 +8,20 @@ import {
 } from "framer-motion";
 import { ArrowRight, Download } from "lucide-react";
 import { personal } from "../data/content";
+import { heroShapes } from "../lib/scene3dPresets";
 import heroImage from "../assets/hero-character.webp";
 import "./Hero.css";
+
+const Scene3D = lazy(() => import("./Scene3D"));
+
+const copyContainer = {
+  animate: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
+};
+
+const copyItem = {
+  initial: { opacity: 0, y: 22 },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1] } },
+};
 
 export default function Hero() {
   const prefersReducedMotion = useReducedMotion();
@@ -49,26 +61,38 @@ export default function Hero() {
 
   return (
     <section id="home" className="hero">
+      <Suspense fallback={null}>
+        <Scene3D shapes={heroShapes} className="hero-scene3d" />
+      </Suspense>
+
       <div className="container hero-grid">
         <motion.div
           className="hero-copy"
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
+          variants={copyContainer}
+          initial="initial"
+          animate="animate"
         >
-          <p className="hero-greeting">Hi, I'm</p>
-          <h1 className="hero-name">{personal.name}</h1>
-          <h2 className="hero-role gradient-text">{personal.role}</h2>
-          <p className="hero-tagline">{personal.tagline}</p>
+          <motion.p className="hero-greeting" variants={copyItem}>
+            Hi, I'm
+          </motion.p>
+          <motion.h1 className="hero-name" variants={copyItem}>
+            {personal.name}
+          </motion.h1>
+          <motion.h2 className="hero-role gradient-text" variants={copyItem}>
+            {personal.role}
+          </motion.h2>
+          <motion.p className="hero-tagline" variants={copyItem}>
+            {personal.tagline}
+          </motion.p>
 
-          <div className="hero-actions">
+          <motion.div className="hero-actions" variants={copyItem}>
             <button className="btn btn-primary" onClick={() => scrollTo("projects")}>
               View My Work <ArrowRight size={18} />
             </button>
             <a href={personal.resume} download className="btn btn-secondary">
               Download Resume <Download size={18} />
             </a>
-          </div>
+          </motion.div>
         </motion.div>
 
         <motion.div

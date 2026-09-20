@@ -1,11 +1,13 @@
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
-import Skills from "./components/Skills";
 import Experience from "./components/Experience";
 import Projects from "./components/Projects";
+import Leadership from "./components/Leadership";
 import Achievements from "./components/Achievements";
+import Skills from "./components/Skills";
 import Education from "./components/Education";
+import Certifications from "./components/Certifications";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import BackgroundField from "./components/BackgroundField";
@@ -18,11 +20,13 @@ function App() {
       <main>
         <Hero />
         <About />
-        <Skills />
         <Experience />
         <Projects />
+        <Leadership />
         <Achievements />
+        <Skills />
         <Education />
+        <Certifications />
         <Contact />
       </main>
       <Footer />
