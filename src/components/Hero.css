@@ -76,33 +76,84 @@
   z-index: 0;
 }
 
-/* The portrait is now a real Three.js scene (HeroPortraitScene) rendered
-   inside this box - a textured 3D plane with its own baked-in alpha
-   cutout, plus torus-mesh orbit rings that get genuine depth occlusion
-   from the plane (alphaTest), not a DOM image with CSS glow/shadow/mask
-   layered on top. This element is just the sizing/positioning box the
-   canvas fills. */
 .hero-frame {
   position: relative;
   z-index: 1;
-  width: min(100%, 680px);
-  aspect-ratio: 1 / 1;
+  width: min(100%, 660px);
+  perspective: 900px;
 }
 
-/* Soft glowing platform beneath the figure - part of the environment
-   (a landing-pad glow), not traced around the person's silhouette. */
+.hero-image-wrap {
+  position: relative;
+  z-index: 2;
+  transform-style: preserve-3d;
+}
+
+.hero-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  /* The source photo already has its background removed pixel-by-pixel
+     (real alpha channel, not a CSS approximation) - this is plain
+     transparency, not a glow or an outline. Two layers, unioned: a small
+     ellipse that fully protects the head/hair, plus a wide, very slowly
+     fading body ellipse so the edge dissolves gradually into the page
+     with no hard boundary and no separate darkening/glow layer needed. */
+  mask-image: radial-gradient(ellipse 21% 17% at 39% 17%, black 75%, transparent 100%),
+    radial-gradient(ellipse 48% 52% at 45% 56%, black 42%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 21% 17% at 39% 17%, black 75%, transparent 100%),
+    radial-gradient(ellipse 48% 52% at 45% 56%, black 42%, transparent 100%);
+  mask-composite: add;
+  -webkit-mask-composite: source-over;
+  /* Minimal neutral depth shadow only - no color, so it reads as depth,
+     not an outline or a glow. */
+  filter: drop-shadow(0 16px 26px rgba(0, 0, 0, 0.4));
+}
+
+/* Subtle drifting particles around the frame */
+.hero-particles {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-particles span {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #8fd8ff;
+  box-shadow: 0 0 8px 2px rgba(143, 216, 255, 0.7);
+  opacity: 0;
+  animation: hero-particle-float 6s ease-in-out infinite;
+}
+
+@keyframes hero-particle-float {
+  0%, 100% { opacity: 0; transform: translateY(0); }
+  15%, 85% { opacity: 0.8; }
+  50% { transform: translateY(-14px); }
+}
+
+/* Soft glowing platform beneath the figure */
 .hero-portrait-platform {
   position: absolute;
-  bottom: 6%;
+  bottom: 4%;
   left: 50%;
   z-index: 0;
-  width: 46%;
-  height: 16px;
+  width: 62%;
+  height: 22px;
   transform: translateX(-50%);
-  background: radial-gradient(ellipse, rgba(91, 127, 255, 0.4) 0%, rgba(91, 127, 255, 0.1) 45%, transparent 75%);
+  background: radial-gradient(ellipse, rgba(91, 127, 255, 0.5) 0%, rgba(91, 127, 255, 0.14) 45%, transparent 75%);
   filter: blur(6px);
   border-radius: 50%;
   pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-particles span {
+    animation: none;
+  }
 }
 
 .hero-scroll-cue {
