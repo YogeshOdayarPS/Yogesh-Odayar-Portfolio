@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { about } from "../data/content";
+import TiltCard from "./TiltCard";
 import "./About.css";
 
 export default function About() {
@@ -29,20 +30,14 @@ export default function About() {
             ))}
           </motion.div>
 
-          <motion.div
-            className="about-stats"
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            {about.stats.map((stat) => (
-              <div key={stat.label} className="glass-card about-stat">
+          <div className="about-stats">
+            {about.stats.map((stat, i) => (
+              <TiltCard key={stat.label} className="glass-card about-stat" delay={0.15 + i * 0.06} strength={7}>
                 <span className="about-stat-value gradient-text">{stat.value}</span>
                 <span className="about-stat-label">{stat.label}</span>
-              </div>
+              </TiltCard>
             ))}
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

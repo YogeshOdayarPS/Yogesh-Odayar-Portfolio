@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Mail, ArrowUpRight } from "lucide-react";
 import { GithubGlyph, LinkedinGlyph } from "./icons/BrandIcons";
 import { personal } from "../data/content";
+import TiltCard from "./TiltCard";
 import "./Contact.css";
 
 const links = [
@@ -28,8 +29,17 @@ export default function Contact() {
           </p>
 
           <div className="contact-links">
-            {links.map(({ label, value, href, icon: Icon }) => (
-              <a key={label} href={href} target="_blank" rel="noopener noreferrer" className="contact-item">
+            {links.map(({ label, value, href, icon: Icon }, i) => (
+              <TiltCard
+                key={label}
+                as="a"
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="contact-item"
+                delay={i * 0.06}
+                strength={6}
+              >
                 <div className="contact-item-icon">
                   <Icon size={22} />
                 </div>
@@ -38,7 +48,7 @@ export default function Contact() {
                   <span className="contact-item-value">{value}</span>
                 </div>
                 <ArrowUpRight size={18} className="contact-item-arrow" />
-              </a>
+              </TiltCard>
             ))}
           </div>
         </motion.div>

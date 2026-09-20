@@ -1,41 +1,17 @@
-import { useRef } from "react";
-import { motion, useMotionValue, useSpring, useTransform, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
+import useTilt from "../hooks/useTilt";
 
 export default function ProjectCard({ project, onOpen }) {
-  const prefersReducedMotion = useReducedMotion();
-  const ref = useRef(null);
-
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const springX = useSpring(x, { stiffness: 150, damping: 16 });
-  const springY = useSpring(y, { stiffness: 150, damping: 16 });
-  const rotateX = useTransform(springY, [-0.5, 0.5], [8, -8]);
-  const rotateY = useTransform(springX, [-0.5, 0.5], [-8, 8]);
-
-  const handleMove = (e) => {
-    if (prefersReducedMotion || !ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-    x.set((e.clientX - rect.left) / rect.width - 0.5);
-    y.set((e.clientY - rect.top) / rect.height - 0.5);
-  };
-
-  const handleLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
+  const { ref, onMouseMove, onMouseLeave, tiltStyle } = useTilt({ strength: 8 });
 
   return (
     <motion.button
       ref={ref}
       className="glass-card project-card"
-      onMouseMove={handleMove}
-      onMouseLeave={handleLeave}
+      onMouseMove={onMouseMove}
+      onMouseLeave={onMouseLeave}
       onClick={() => onOpen(project)}
-      style={
-        prefersReducedMotion
-          ? undefined
-          : { rotateX, rotateY, transformPerspective: 800 }
-      }
+      style={tiltStyle}
       whileHover={{ y: -6 }}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}

@@ -2,6 +2,7 @@ import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Trophy } from "lucide-react";
 import { achievements } from "../data/content";
+import TiltCard from "./TiltCard";
 import "./Achievements.css";
 
 export default function Achievements() {
@@ -41,19 +42,17 @@ export default function Achievements() {
 
         <div className="achievements-grid">
           {items.map((item, i) => (
-            <motion.div
+            <TiltCard
               key={item.title + i}
               className={`glass-card achievement-card ${item.highlight ? "highlight" : ""}`}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.4, delay: (i % 8) * 0.04 }}
+              delay={(i % 8) * 0.04}
+              strength={6}
             >
               {item.highlight && <Trophy size={16} className="achievement-icon" />}
               <span className="achievement-category">{item.category}</span>
               <h4 className="achievement-title">{item.title}</h4>
               <p className="achievement-description">{item.description}</p>
-            </motion.div>
+            </TiltCard>
           ))}
         </div>
       </div>

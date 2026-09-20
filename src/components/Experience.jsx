@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Briefcase, Award, ExternalLink } from "lucide-react";
 import { experience } from "../data/content";
+import TiltCard from "./TiltCard";
 import "./Experience.css";
 
 export default function Experience() {
@@ -49,8 +50,8 @@ export default function Experience() {
               transition={{ duration: 0.35 }}
               className="timeline"
             >
-              {experience.industry.map((job) => (
-                <div key={job.company} className="glass-card timeline-card">
+              {experience.industry.map((job, i) => (
+                <TiltCard key={job.company} className="glass-card timeline-card" delay={i * 0.08} strength={4}>
                   <span className="timeline-date">{job.date}</span>
                   <h3 className="timeline-role">{job.role}</h3>
                   <p className="timeline-company">{job.company}</p>
@@ -77,7 +78,7 @@ export default function Experience() {
                       View Project <ExternalLink size={14} />
                     </a>
                   )}
-                </div>
+                </TiltCard>
               ))}
             </motion.div>
           ) : (
@@ -89,12 +90,12 @@ export default function Experience() {
               transition={{ duration: 0.35 }}
               className="ieee-timeline"
             >
-              {experience.ieee.map((role) => (
-                <div key={role.role} className="glass-card ieee-card">
+              {experience.ieee.map((role, i) => (
+                <TiltCard key={role.role} className="glass-card ieee-card" delay={i * 0.08} strength={6}>
                   <span className="timeline-date">{role.duration}</span>
                   <h4 className="timeline-role">{role.role}</h4>
                   <p className="timeline-company">{role.organization}</p>
-                </div>
+                </TiltCard>
               ))}
             </motion.div>
           )}
