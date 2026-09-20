@@ -84,7 +84,7 @@
   width: min(320px, 78vw);
   text-align: left;
   pointer-events: none;
-  overflow: visible;
+  overflow: hidden;
   box-shadow: 0 30px 60px -28px rgba(0, 0, 0, 0.75);
 }
 
@@ -94,11 +94,9 @@
 
 .achv-card-image-wrap {
   position: relative;
-  width: calc(100% + 64px);
-  margin: 0 -32px;
+  width: 100%;
   height: 320px;
   overflow: hidden;
-  border-radius: var(--radius-md) var(--radius-md) 0 0;
   background: var(--surface);
 }
 
@@ -112,7 +110,6 @@
 .achv-card-body {
   padding: 1.15rem 1.5rem 1.4rem;
   position: relative;
-  border-radius: 0 0 var(--radius-md) var(--radius-md);
 }
 
 .achv-card.highlight .achv-card-body {
@@ -162,8 +159,6 @@
   }
 
   .achv-card-image-wrap {
-    width: calc(100% + 36px);
-    margin: 0 -18px;
     height: 260px;
   }
 
