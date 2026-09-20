@@ -177,11 +177,10 @@ export const achievements = [
     ],
   },
   {
-    category: "Events",
+    category: "Awards",
     items: [
       { title: "Ideathon SDG Goal 16 — 1st Runner-Up", description: "HydroGuard SkyDefender project", highlight: true },
       { title: "Hack4Purpose", description: "Top 100 in India selection", highlight: true },
-      { title: "Phoenix'25 — 1st Prize", description: "Paper Presentation, SRM IST Ramapuram" },
       { title: "ADMAD (BIS) — 2nd Prize", description: "Sri Sairam Engineering College" },
       { title: "TEZAS 2K25 — 1st Place", description: "Technical Quiz, RMK CET" },
       { title: "ADMAD (BIS) — 1st Place", description: "Sri Sairam Engineering College" },
@@ -193,7 +192,7 @@ export const achievements = [
     ],
   },
   {
-    category: "Coordination",
+    category: "IEEE & Leadership",
     items: [
       { title: "GUVI Hackathon Coordinator", description: "IEEE TEMS × HCL GUVI, Oct 2025", highlight: true },
       { title: "INTEMSTELLAR Coordinator", description: "IEEE TEMS One-Day Symposium, Nov 2025" },
@@ -203,7 +202,7 @@ export const achievements = [
     ],
   },
   {
-    category: "Volunteering",
+    category: "Events",
     items: [
       { title: "Winspire 1.0 — Panelist Speaker", description: "March 2025", highlight: true },
       { title: "Cognizant SPIN Event", description: "Volunteer, Nov 2025" },
@@ -213,6 +212,12 @@ export const achievements = [
       { title: "Blockchain BootCamp", description: "IEEE TEMS, Apr 2025" },
       { title: "B2B Event", description: "IEEE TEMS, May 2025" },
       { title: "Ascendra — 4th Anniversary", description: "IEEE TEMS, Nov 2025" },
+    ],
+  },
+  {
+    category: "Presentations",
+    items: [
+      { title: "Phoenix'25 — 1st Prize", description: "Paper Presentation, SRM IST Ramapuram", highlight: true },
     ],
   },
 ];

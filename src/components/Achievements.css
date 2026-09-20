@@ -1,17 +1,19 @@
+/* Shared: category filter chips (used by both cinematic and reduced-motion paths) */
 .achievements-filters {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 0.6rem;
-  margin-bottom: 2.25rem;
+  margin: 1.25rem 0 0;
 }
 
 .filter-chip {
-  padding: 0.55rem 1.15rem;
+  padding: 0.5rem 1.1rem;
   border-radius: 999px;
   border: 1px solid var(--border);
   background: var(--surface);
   color: var(--text-dim);
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 500;
   transition: all 0.2s ease;
 }
@@ -22,88 +24,142 @@
 }
 
 .filter-chip.active {
-  background: linear-gradient(120deg, var(--accent), var(--accent-2));
+  background: linear-gradient(120deg, #5ce1ff, #9b6bff);
   border-color: transparent;
-  color: #fff;
+  color: #05070e;
 }
 
-.achievements-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 1rem;
-}
+/* ---------- Cinematic pinned experience ---------- */
 
-.achievement-card {
+.achv-pin-outer {
   position: relative;
-  padding: 1.35rem 1.5rem 2.25rem;
+}
+
+.achv-pin-inner {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
-  cursor: pointer;
-  transition: transform 0.25s ease, border-color 0.25s ease;
+  background:
+    radial-gradient(45% 55% at 50% 42%, rgba(92, 225, 255, 0.16) 0%, transparent 70%),
+    radial-gradient(35% 45% at 78% 75%, rgba(155, 107, 255, 0.12) 0%, transparent 70%),
+    radial-gradient(35% 45% at 15% 20%, rgba(92, 225, 255, 0.08) 0%, transparent 70%),
+    var(--bg);
 }
 
-.achievement-card:hover {
-  transform: translateY(-3px);
-  border-color: var(--border-strong);
+.achv-header {
+  position: relative;
+  z-index: 5;
+  text-align: center;
+  padding: clamp(1.75rem, 5vh, 3rem) 1.5rem 0;
+  flex-shrink: 0;
 }
 
-.achievement-card:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
+.achv-header .section-title {
+  margin-bottom: 0;
 }
 
-.achievement-card.highlight {
-  border-color: rgba(91, 127, 255, 0.4);
-  background: linear-gradient(160deg, rgba(91, 127, 255, 0.1), var(--surface));
-}
-
-.achievement-icon {
-  position: absolute;
-  top: 1.1rem;
-  right: 1.1rem;
-  color: var(--accent);
-}
-
-.achievement-category {
-  font-size: 0.72rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--text-faint);
-}
-
-.achievement-title {
-  font-size: 1.02rem;
-  font-weight: 600;
-  padding-right: 1.25rem;
-}
-
-.achievement-description {
-  color: var(--text-dim);
-  font-size: 0.88rem;
-}
-
-.achievement-expand {
+.achv-stage {
+  position: relative;
+  flex: 1;
+  perspective: 1600px;
   overflow: hidden;
 }
 
-.achievement-expand p {
-  padding-top: 0.6rem;
-  margin-top: 0.4rem;
-  border-top: 1px solid var(--border);
-  color: var(--text-faint);
-  font-size: 0.82rem;
+.achv-cards-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+
+.achv-card {
+  position: absolute;
+  width: min(320px, 78vw);
+  padding: 1.5rem 1.75rem;
+  text-align: left;
+  pointer-events: none;
+  box-shadow: 0 30px 60px -28px rgba(0, 0, 0, 0.75);
+}
+
+.achv-card.highlight {
+  border-color: rgba(92, 225, 255, 0.45);
+  background: linear-gradient(160deg, rgba(92, 225, 255, 0.14), var(--surface));
+}
+
+.achv-card-icon {
+  position: absolute;
+  top: 1.1rem;
+  right: 1.1rem;
+  color: #5ce1ff;
+}
+
+.achv-card-category {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #8fd8ff;
+}
+
+.achv-card-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0.4rem 0 0.45rem;
+  padding-right: 1.25rem;
+}
+
+.achv-card-description {
+  color: var(--text-dim);
+  font-size: 0.9rem;
   line-height: 1.5;
 }
 
-.achievement-chevron {
-  position: absolute;
-  bottom: 0.9rem;
-  right: 1.1rem;
-  color: var(--text-faint);
-  transition: transform 0.25s ease;
+@media (max-width: 760px) {
+  .achv-stage {
+    perspective: 900px;
+  }
+
+  .achv-card {
+    padding: 1.15rem 1.35rem;
+  }
+
+  .achv-header {
+    padding-top: 1.25rem;
+  }
 }
 
-.achievement-chevron.open {
-  transform: rotate(180deg);
+/* ---------- Reduced-motion fallback ---------- */
+
+.achv-static-dna {
+  display: flex;
+  justify-content: center;
+  margin: 0.5rem 0 1.75rem;
+}
+
+.dna-static {
+  width: 110px;
+  height: 230px;
+}
+
+.achv-static-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.achv-static-card {
+  position: relative;
+  padding: 1.35rem 1.5rem;
+}
+
+.achv-static-card.highlight {
+  border-color: rgba(92, 225, 255, 0.4);
+  background: linear-gradient(160deg, rgba(92, 225, 255, 0.1), var(--surface));
 }
