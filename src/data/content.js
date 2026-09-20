@@ -52,6 +52,15 @@ export const certifications = [
 
 export const experience = [
   {
+    role: "Software Developer Intern",
+    company: "SprintXplore Infotech Private Limited",
+    date: "Jan 2026 – Apr 2026",
+    problem: "Academic credentials can be difficult to verify and vulnerable to tampering.",
+    solution: "Built EduChain, a secure blockchain-based academic credential platform.",
+    outcome: "Enabled tamper-proof credential issuance, verification, and revocation with QR-based verification.",
+    tech: ["React/Next.js", "Node.js/FastAPI", "PostgreSQL", "Polygon", "IPFS", "MetaMask"],
+  },
+  {
     role: "Web Developer Intern",
     company: "Hyundai Motor India Limited",
     date: "June 2025",
@@ -152,6 +161,16 @@ export const achievements = [
   {
     category: "Hackathons",
     items: [
+      {
+        title: "STATATHON 2025–26 — Winner",
+        description: "MoSPI × MoE — Statistical Data Privacy & Security (ANVIKSHAN)",
+        highlight: true,
+      },
+      {
+        title: "ChemOvate '26 — Winner",
+        description: "St. Joseph's College of Engineering, 2026",
+        highlight: true,
+      },
       { title: "SAIHACK FEST — Winner", description: "2024 & 2025 consecutive wins", highlight: true },
       { title: "MEDCHAIN", description: "Prathyusha Engineering College" },
       { title: "BLOCKED — QTUXATHON", description: "Sri Sairam Engineering College" },
