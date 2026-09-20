@@ -34,8 +34,11 @@ function buildLongitudeArc(radius, lonDeg, segments = 48) {
 
 // Latitude/longitude angles deliberately skip 0deg so no line runs straight
 // through the front-center of the globe, where the quote sits.
-const LATITUDES = { low: [-35, 35], high: [-55, -25, 25, 55] };
-const LONGITUDES = { low: [30, 150, 270], high: [20, 80, 140, 200, 260, 320] };
+const LATITUDES = { low: [-45, 15, 50], high: [-60, -38, -16, 16, 38, 60] };
+const LONGITUDES = {
+  low: [25, 115, 205, 295],
+  high: [22, 67, 112, 157, 202, 247, 292, 337],
+};
 
 function HoloGlobe({ scrollProgress, quality }) {
   const groupRef = useRef(null);
@@ -64,31 +67,51 @@ function HoloGlobe({ scrollProgress, quality }) {
 
   return (
     <group ref={groupRef}>
-      {/* Sparse, clean grid lines - the visible "holographic" surface */}
+      {/* Neon holographic grid - no fill behind it, the dark page background
+          and stars show straight through the globe */}
       {latGeometries.map((geo, i) => (
         <lineLoop key={`lat-${i}`} geometry={geo}>
-          <lineBasicMaterial color="#5ce1ff" transparent opacity={0.24} />
+          <lineBasicMaterial
+            color="#7ce8ff"
+            transparent
+            opacity={0.55}
+            blending={THREE.AdditiveBlending}
+            depthWrite={false}
+          />
         </lineLoop>
       ))}
       {lonGeometries.map((geo, i) => (
         <line key={`lon-${i}`} geometry={geo}>
-          <lineBasicMaterial color="#5ce1ff" transparent opacity={0.24} />
+          <lineBasicMaterial
+            color="#7ce8ff"
+            transparent
+            opacity={0.55}
+            blending={THREE.AdditiveBlending}
+            depthWrite={false}
+          />
         </line>
       ))}
-      {/* Solid dark core so the (now sparse) grid reads as a volume and the
-          quote keeps strong contrast behind it */}
-      <mesh>
-        <sphereGeometry args={[CORE_RADIUS * 0.95, 16, 12]} />
-        <meshBasicMaterial color="#0b0f1c" transparent opacity={0.55} />
-      </mesh>
-      {/* Soft outer glow shell */}
+      {/* Soft outer glow shell - keeps the "holographic atmosphere" feel
+          without ever reading as a solid sphere */}
       <mesh>
         <sphereGeometry args={[CORE_RADIUS * 1.28, 24, 24]} />
-        <meshBasicMaterial color="#5ce1ff" transparent opacity={0.05} side={THREE.BackSide} />
+        <meshBasicMaterial
+          color="#5ce1ff"
+          transparent
+          opacity={0.05}
+          side={THREE.BackSide}
+          depthWrite={false}
+        />
       </mesh>
       <mesh>
         <sphereGeometry args={[CORE_RADIUS * 1.5, 24, 24]} />
-        <meshBasicMaterial color="#9b6bff" transparent opacity={0.03} side={THREE.BackSide} />
+        <meshBasicMaterial
+          color="#9b6bff"
+          transparent
+          opacity={0.03}
+          side={THREE.BackSide}
+          depthWrite={false}
+        />
       </mesh>
     </group>
   );
