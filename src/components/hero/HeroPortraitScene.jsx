@@ -5,14 +5,21 @@ import { useReducedMotion } from "framer-motion";
 import portraitTexUrl from "../../assets/hero-portrait-3d.webp";
 
 const IMG_ASPECT = 1220 / 1007;
+const CAMERA_FOV = 38;
+const CAMERA_DISTANCE = 7;
+// Frustum height at the portrait's depth (z=0), for sizing the plane to
+// fully fill the square frame like CSS object-fit: cover - the image is
+// wider than the frame, so filling the height means the sides extend past
+// the frustum edges and get cropped there, same as cover would.
+const FRUSTUM_HEIGHT = 2 * Math.tan((CAMERA_FOV * Math.PI) / 360) * CAMERA_DISTANCE;
 
 // The photo's own baked-in alpha (real per-pixel cutout, pre-computed
 // offline) is the only thing that makes the edge disappear - no CSS glow,
 // outline, drop-shadow or halo is added anywhere in this scene.
 function Portrait({ texture, floatEnabled }) {
   const meshRef = useRef(null);
-  const width = 3.5;
-  const height = width / IMG_ASPECT;
+  const height = FRUSTUM_HEIGHT;
+  const width = height * IMG_ASPECT;
 
   useFrame((state) => {
     if (!meshRef.current || !floatEnabled) return;
