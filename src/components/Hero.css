@@ -79,7 +79,7 @@
 .hero-frame {
   position: relative;
   z-index: 1;
-  width: min(96%, 500px);
+  width: min(98%, 540px);
   perspective: 900px;
 }
 
@@ -94,82 +94,20 @@
   height: auto;
   display: block;
   /* The source photo already has its background removed pixel-by-pixel
-     (real alpha channel, not a CSS approximation). This mask is just a
-     light safety-net vignette for the outer margin. The ellipse is
-     pushed up and widened so its soft-fade band sits ABOVE the hairline
-     instead of across it - the head/hair stay in the fully-opaque core. */
-  /* Two mask layers, unioned (default mask-composite: add): a small
-     ellipse that fully protects the head/hair (never fades, regardless
-     of what the wider layer below does), plus a tighter body/frame
-     ellipse that aggressively fades the outer corners to hide the one
-     background patch the pixel cutout couldn't cleanly separate. */
+     (real alpha channel, not a CSS approximation) - this is plain
+     transparency, not a glow or an outline. Two layers, unioned: a small
+     ellipse that fully protects the head/hair, plus a wide, very slowly
+     fading body ellipse so the edge dissolves gradually into the page
+     with no hard boundary and no separate darkening/glow layer needed. */
   mask-image: radial-gradient(ellipse 21% 17% at 39% 17%, black 75%, transparent 100%),
-    radial-gradient(ellipse 46% 50% at 45% 56%, black 55%, transparent 92%);
+    radial-gradient(ellipse 48% 52% at 45% 56%, black 42%, transparent 100%);
   -webkit-mask-image: radial-gradient(ellipse 21% 17% at 39% 17%, black 75%, transparent 100%),
-    radial-gradient(ellipse 46% 50% at 45% 56%, black 55%, transparent 92%);
+    radial-gradient(ellipse 48% 52% at 45% 56%, black 42%, transparent 100%);
   mask-composite: add;
   -webkit-mask-composite: source-over;
-  /* Neutral depth shadow only - no color tint, so nothing glows onto the
-     hair. Any neon rim light lives in separate elements positioned lower
-     (.hero-torso-glow), well clear of the head. */
-  filter: drop-shadow(0 20px 36px rgba(0, 0, 0, 0.55));
-}
-
-/* Darkens the outer corners (multiply blend, not alpha) so the one patch
-   of background the pixel-level cutout couldn't cleanly separate from the
-   hoodie silhouette sinks into the page tone instead of reading as a
-   visible shape. Bright/saturated content (rings, skin) barely darkens
-   under multiply, so it stays fully visible - only the flat dark leftover
-   is suppressed. Never touches the hair/face core region. */
-.hero-portrait-edge-dim {
-  position: absolute;
-  inset: 0;
-  mix-blend-mode: multiply;
-  background: radial-gradient(
-    ellipse 50% 46% at 45% 68%,
-    transparent 60%,
-    rgba(5, 7, 14, 0.45) 85%,
-    rgba(5, 7, 14, 0.68) 100%
-  );
-  /* Without this, the dark fill beyond the ellipse's reach still paints
-     the full rectangular box (radial-gradient's last stop extends to the
-     box corners) - that rectangle was showing up as a visible box against
-     the page background. Clip it to the exact same shape as the image
-     itself so it only ever darkens pixels the photo actually occupies. */
-  mask-image: radial-gradient(ellipse 21% 17% at 39% 17%, black 75%, transparent 100%),
-    radial-gradient(ellipse 46% 50% at 45% 56%, black 55%, transparent 92%);
-  -webkit-mask-image: radial-gradient(ellipse 21% 17% at 39% 17%, black 75%, transparent 100%),
-    radial-gradient(ellipse 46% 50% at 45% 56%, black 55%, transparent 92%);
-  mask-composite: add;
-  -webkit-mask-composite: source-over;
-  pointer-events: none;
-}
-
-/* Soft neon glow confined to the torso/shoulder area - never reaches the
-   head, so it frames the person instead of tinting the hair. */
-.hero-torso-glow {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 6%;
-  top: 46%;
-  z-index: 0;
-  background: radial-gradient(ellipse 65% 80% at 50% 70%, rgba(91, 127, 255, 0.22) 0%, transparent 70%),
-    radial-gradient(ellipse 55% 70% at 30% 85%, rgba(155, 107, 255, 0.16) 0%, transparent 70%);
-  filter: blur(20px);
-  pointer-events: none;
-}
-
-.hero-screen-glow {
-  position: absolute;
-  right: 10%;
-  bottom: 24%;
-  width: 45%;
-  height: 30%;
-  background: radial-gradient(circle, rgba(91, 127, 255, 0.55) 0%, transparent 72%);
-  filter: blur(18px);
-  mix-blend-mode: screen;
-  pointer-events: none;
+  /* Minimal neutral depth shadow only - no color, so it reads as depth,
+     not an outline or a glow. */
+  filter: drop-shadow(0 16px 26px rgba(0, 0, 0, 0.4));
 }
 
 /* Subtle drifting particles around the frame */
@@ -280,7 +218,7 @@
   }
 
   .hero-frame {
-    width: min(82%, 380px);
+    width: min(85%, 400px);
   }
 }
 

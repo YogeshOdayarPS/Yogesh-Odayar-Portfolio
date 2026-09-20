@@ -36,8 +36,6 @@ export default function Hero() {
 
   const rotateX = useTransform(springY, [-0.5, 0.5], [6, -6]);
   const rotateY = useTransform(springX, [-0.5, 0.5], [-6, 6]);
-  const glowX = useTransform(springX, [-0.5, 0.5], [-18, 18]);
-  const glowY = useTransform(springY, [-0.5, 0.5], [-18, 18]);
   const bgShiftX = useTransform(springX, [-0.5, 0.5], [10, -10]);
   const bgShiftY = useTransform(springY, [-0.5, 0.5], [10, -10]);
 
@@ -116,8 +114,6 @@ export default function Hero() {
             onMouseMove={handlePointerMove}
             onMouseLeave={handlePointerLeave}
           >
-            <div className="hero-torso-glow" aria-hidden="true" />
-
             <div className="hero-particles" aria-hidden="true">
               <span style={{ top: "40%", left: "4%", animationDelay: "0s" }} />
               <span style={{ top: "34%", left: "93%", animationDelay: "1.2s" }} />
@@ -156,27 +152,6 @@ export default function Hero() {
                     : { duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 1.6 }
                 }
               />
-
-              <motion.div
-                className="hero-screen-glow"
-                style={
-                  prefersReducedMotion
-                    ? undefined
-                    : { x: glowX, y: glowY }
-                }
-                animate={
-                  prefersReducedMotion
-                    ? { opacity: 0.5 }
-                    : { opacity: [0.35, 0.65, 0.35] }
-                }
-                transition={
-                  prefersReducedMotion
-                    ? undefined
-                    : { duration: 4, repeat: Infinity, ease: "easeInOut" }
-                }
-              />
-
-              <div className="hero-portrait-edge-dim" aria-hidden="true" />
             </motion.div>
 
             <div className="hero-portrait-platform" aria-hidden="true" />
