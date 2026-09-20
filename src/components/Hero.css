@@ -79,7 +79,7 @@
 .hero-frame {
   position: relative;
   z-index: 1;
-  width: min(98%, 540px);
+  width: min(100%, 660px);
   perspective: 900px;
 }
 
@@ -218,7 +218,7 @@
   }
 
   .hero-frame {
-    width: min(85%, 400px);
+    width: min(90%, 480px);
   }
 }
 
