@@ -8,10 +8,7 @@ const IMG_ASPECT = 1347 / 1167;
 
 // The photo's own baked-in alpha (real per-pixel cutout, pre-computed
 // offline) is the only thing that makes the edge disappear - no CSS glow,
-// outline, drop-shadow or halo is added anywhere in this scene. alphaTest
-// makes the depth buffer respect that silhouette, so the rings below get
-// genuinely occluded by opaque pixels and show through transparent ones,
-// via real 3D depth - not a layering trick.
+// outline, drop-shadow or halo is added anywhere in this scene.
 function Portrait({ texture, floatEnabled }) {
   const meshRef = useRef(null);
   const width = 3.5;
@@ -37,20 +34,6 @@ function Portrait({ texture, floatEnabled }) {
   );
 }
 
-function OrbitRing({ radius, tilt, speed, color, opacity, thickness = 0.014, direction = 1, yOffset = 0 }) {
-  const ref = useRef(null);
-  useFrame((_, delta) => {
-    if (!ref.current) return;
-    ref.current.rotation.z += delta * speed * direction;
-  });
-  return (
-    <mesh ref={ref} position={[0, yOffset, 0]} rotation={[tilt, 0, 0]}>
-      <torusGeometry args={[radius, thickness, 10, 96]} />
-      <meshBasicMaterial color={color} transparent opacity={opacity} toneMapped={false} />
-    </mesh>
-  );
-}
-
 function ParallaxRig({ children, intensity, enabled }) {
   const groupRef = useRef(null);
   useFrame((state) => {
@@ -68,8 +51,6 @@ function SceneContent({ texture, reducedMotion }) {
   return (
     <ParallaxRig intensity={0.09} enabled={!reducedMotion}>
       <Portrait texture={texture} floatEnabled={!reducedMotion} />
-      <OrbitRing radius={2.0} tilt={1.4} speed={0.22} color="#5b7fff" opacity={0.55} direction={1} yOffset={-0.55} />
-      <OrbitRing radius={2.3} tilt={1.35} speed={0.16} color="#9b6bff" opacity={0.4} direction={-1} yOffset={-0.62} />
     </ParallaxRig>
   );
 }
