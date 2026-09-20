@@ -68,18 +68,14 @@
   overflow: hidden;
 }
 
-.achv-dna-layer {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-}
-
 .achv-cards-layer {
   position: absolute;
   inset: 0;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
+  transform-style: preserve-3d;
   pointer-events: none;
 }
 

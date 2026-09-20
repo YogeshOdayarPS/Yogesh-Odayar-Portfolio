@@ -105,11 +105,9 @@ export default function Achievements() {
         </div>
 
         <div className="achv-stage">
-          <div className="achv-dna-layer">
-            <Suspense fallback={null}>
-              <DNAScene quality={isMobile ? "low" : "high"} />
-            </Suspense>
-          </div>
+          <Suspense fallback={null}>
+            <DNAScene quality={isMobile ? "low" : "high"} />
+          </Suspense>
 
           <div className="achv-cards-layer">
             {items.map((item, i) => (
