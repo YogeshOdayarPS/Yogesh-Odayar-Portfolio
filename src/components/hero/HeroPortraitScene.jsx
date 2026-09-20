@@ -4,7 +4,7 @@ import * as THREE from "three";
 import { useReducedMotion } from "framer-motion";
 import portraitTexUrl from "../../assets/hero-portrait-3d.webp";
 
-const IMG_ASPECT = 1347 / 1167;
+const IMG_ASPECT = 1220 / 1007;
 
 // The photo's own baked-in alpha (real per-pixel cutout, pre-computed
 // offline) is the only thing that makes the edge disappear - no CSS glow,
