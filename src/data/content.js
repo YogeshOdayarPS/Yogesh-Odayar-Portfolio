@@ -488,15 +488,17 @@ export const achievements = [
   },
 ];
 
+// Navbar order (desktop + mobile). Labels can differ from section names:
+// "Tech" -> Skills section, "Hackathons" -> Achievements section.
+// Education stays on the page but is intentionally not in the nav.
 export const navSections = [
   { id: "home", label: "Home" },
   { id: "about", label: "About" },
   { id: "experience", label: "Experience" },
+  { id: "skills", label: "Tech" },
+  { id: "certifications", label: "Certifications" },
   { id: "projects", label: "Projects" },
   { id: "leadership", label: "Leadership" },
-  { id: "achievements", label: "Achievements" },
-  { id: "skills", label: "Skills" },
-  { id: "education", label: "Education" },
-  { id: "certifications", label: "Certifications" },
+  { id: "achievements", label: "Hackathons" },
   { id: "contact", label: "Contact" },
 ];
