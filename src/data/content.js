@@ -1,3 +1,9 @@
+import anvikshanImg from "../assets/projects/anvikshan.webp";
+import cblockImg from "../assets/projects/cblock.webp";
+import blockedImg from "../assets/projects/blocked.webp";
+import kidbraceImg from "../assets/projects/kidbrace.webp";
+import hydroguardImg from "../assets/projects/hydroguard.webp";
+
 export const personal = {
   name: "Yogesh Odayar P S",
   role: "Software Developer",
@@ -18,7 +24,7 @@ export const about = {
     "I'm most energized by hackathons and fast-build sprints: two consecutive SAIHACK FEST wins, a Top-100-in-India selection at Hack4Purpose, and a published patent on autonomous rescue drones are the kind of outcomes I chase.",
   ],
   stats: [
-    { label: "GPA", value: "8.60" },
+    { label: "GPA", value: "8.70" },
     { label: "Hackathon Wins", value: "5+" },
     { label: "IEEE Roles", value: "4" },
     { label: "Published Patent", value: "1" },
@@ -41,13 +47,127 @@ export const skillGroups = [
   },
 ];
 
+// Certifications & Coursework - cards render in this exact order.
+// - icon / courses[].icon are keys into CERT_ICONS in Certifications.jsx.
+// - expandable cards need courses + certificateLink; the link is only used
+//   for the "View Certificates" button, never shown as text.
+// - a course can take an optional `link` to its own certificate.
 export const certifications = [
-  { title: "Great Learning", note: "Professional Certification" },
-  { title: "Accenture iAspire", note: "Professional Certification" },
-  { title: "Google", note: "Professional Certification" },
-  { title: "Cisco", note: "Networking Basics" },
-  { title: "NPTEL — Java, DBMS, Cloud Computing, Python", note: "Academic Certification" },
-  { title: "IIT Spoken Tutorial — Java, C, CSS, R, Git", note: "Academic Certification" },
+  {
+    title: "Infosys",
+    subtitle: "AI Certifications",
+    icon: "infosys",
+    expandable: true,
+    courses: [{ name: "AI Certifications", icon: "ai" }],
+    certificateLink: "https://drive.google.com/drive/folders/1GzSZfFhPYNrtPvv1XDkIF9N9WbgwMgVP?usp=drive_link",
+  },
+  {
+    title: "Cisco",
+    subtitle: "Networking Basics",
+    icon: "cisco",
+    expandable: true,
+    courses: [{ name: "Networking Basics", icon: "network" }],
+    certificateLink: "https://drive.google.com/drive/folders/1UPhcB1rMGXGc4B-vH1f4RwJWdKBNXVSW?usp=drive_link",
+  },
+  {
+    title: "Google × Coursera",
+    subtitle: "Professional Certification",
+    icon: "google-coursera",
+    expandable: true,
+    // Replace these three with the exact course names.
+    courses: [
+      { name: "Course 1", icon: "coursera" },
+      { name: "Course 2", icon: "coursera" },
+      { name: "Course 3", icon: "coursera" },
+    ],
+    certificateLink: "https://drive.google.com/drive/folders/1GrKskWfzUyiWOzI4utI6OUJ6wOf_kmll?usp=drive_link",
+  },
+  {
+    title: "NPTEL",
+    subtitle: "Professional & Academic Certifications",
+    icon: "academic",
+    expandable: true,
+    courses: [
+      { name: "Java", icon: "java" },
+      { name: "DBMS", icon: "database" },
+      { name: "Cloud Computing", icon: "cloud" },
+      { name: "Python", icon: "python" },
+    ],
+    certificateLink: "https://drive.google.com/drive/folders/1toYBuHAUEZwIprtWPbwrKF5rd7PsCfFT?usp=drive_link",
+  },
+  {
+    title: "Great Learning",
+    subtitle: "Full Stack Development",
+    icon: "great-learning",
+    expandable: true,
+    courses: [
+      { name: "HTML", icon: "html5" },
+      { name: "CSS", icon: "css3" },
+      { name: "JavaScript", icon: "javascript" },
+    ],
+    certificateLink: "https://drive.google.com/drive/folders/1TzLsGL7-JBSxmMA_S2QVmoEnKS2Uqtm4?usp=drive_link",
+  },
+  {
+    title: "SkillRack",
+    subtitle: "Programming Practice & Challenges",
+    icon: "coding",
+    expandable: true,
+    courses: [
+      { name: "Java Programming", icon: "java" },
+      { name: "Python Programming", icon: "python" },
+      { name: "Daily Challenge", icon: "challenge" },
+    ],
+    certificateLink: "https://drive.google.com/drive/folders/1sV1t6oJnC0fC7FCTQOk3oWbhWm7xjVoF?usp=drive_link",
+  },
+  {
+    title: "IIT Spoken Tutorial",
+    subtitle: "Programming & Technical Certifications",
+    icon: "tutorial",
+    expandable: true,
+    courses: [
+      { name: "Java", icon: "java" },
+      { name: "C", icon: "c" },
+      { name: "CSS", icon: "css3" },
+      { name: "R", icon: "r" },
+      { name: "Git", icon: "git" },
+    ],
+    certificateLink: "https://drive.google.com/drive/folders/1gHdvUPn0SSnr_3FK4GSBUf4DXBVZXSTR?usp=drive_link",
+  },
+  {
+    title: "Simplilearn",
+    subtitle: "Prompt Engineering",
+    icon: "learning",
+    expandable: true,
+    courses: [{ name: "Prompt Engineering", icon: "prompt" }],
+    certificateLink: "https://drive.google.com/drive/folders/1-MmPdoKZOj6_OxUOh-2EW4hAhFLQNaKU?usp=drive_link",
+  },
+  {
+    title: "Brainovision",
+    subtitle: "Data Science using Python",
+    icon: "data-science",
+    expandable: true,
+    courses: [{ name: "Data Science using Python", icon: "python" }],
+    certificateLink: "https://drive.google.com/drive/folders/1YZWznW3hcaXTPSvzdNN6G-vBLXZxFRql?usp=drive_link",
+  },
+  {
+    title: "CodeChef",
+    subtitle: "Programming Certifications",
+    icon: "codechef",
+    expandable: true,
+    courses: [
+      { name: "Java", icon: "java" },
+      { name: "C++", icon: "cpp" },
+      { name: "Python", icon: "python" },
+    ],
+    certificateLink: "https://drive.google.com/drive/folders/1I0ks_5sb86RROYC_UwNp44tqPlJayxD2?usp=drive_link",
+  },
+  // Keep last. No certificate proof yet, so it stays a static card.
+  {
+    title: "Accenture",
+    subtitle: "Professional Certification",
+    icon: "accenture",
+    expandable: false,
+  },
 ];
 
 export const experience = [
@@ -91,45 +211,78 @@ export const leadership = {
 
 export const projects = [
   {
-    id: "kidbrace",
-    title: "CK KidBrace",
-    category: "IoT & Health",
-    description: "Smart wearable system for infant health monitoring.",
-    tech: ["IoT Sensors", "Microcontroller", "Mobile App"],
+    id: "anvikshan",
+    title: "ANVIKSHAN",
+    category: "Statathon 2025 — Winner",
+    description:
+      "A statistical data privacy evaluation and enforcement system for assessing disclosure risks and applying privacy-preserving techniques while preserving the utility of sensitive datasets.",
+    image: anvikshanImg,
+    imagePosition: "50% 38%",
+    tech: [
+      "Data Privacy",
+      "Anonymisation",
+      "Differential Privacy",
+      "t-Closeness",
+      "Statistical Disclosure Control",
+    ],
     details:
-      "A smart wearable system that monitors infant health parameters and sends real-time safety alerts to parents via a mobile application.",
-    outcome: "Real-time alerts & preventive child safety",
-  },
-  {
-    id: "blocked",
-    title: "BlockED",
-    category: "Blockchain",
-    description: "NFT microcredential framework for secure, verifiable learning.",
-    tech: ["Blockchain", "Smart Contracts", "NFTs", "IPFS"],
-    link: "https://block-ed.netlify.app/",
-    details:
-      "A blockchain-based course learning platform enabling secure, verifiable, and personalized learning certifications using smart contracts and decentralized storage.",
+      "A statistical data privacy evaluation and enforcement system for assessing disclosure risks and applying privacy-preserving techniques while preserving the utility of sensitive datasets.",
+    outcome: "Winner — Statathon 2025 (MoSPI × MoE)",
+    // LinkedIn post for the "View Achievement" button - never shown as text.
+    achievementLink: "https://www.linkedin.com/feed/update/urn:li:activity:7476539857444696065/",
   },
   {
     id: "cblock",
     title: "CBlock",
     category: "Web3 Marketplace",
     description: "Decentralized carbon credit trading platform.",
+    image: cblockImg,
+    imagePosition: "60% 40%",
     tech: ["Blockchain", "Smart Contracts", "Web/Mobile App"],
     link: "https://cblock.vercel.app/",
     details:
       "Decentralized carbon credit trading platform ensuring transparent issuance, verification, and trading of carbon credits. Cleared all internal SIH hackathon levels and submitted under AICTE student innovation.",
   },
   {
+    id: "blocked",
+    title: "BlockED",
+    category: "Blockchain",
+    description: "NFT microcredential framework for secure, verifiable learning.",
+    image: blockedImg,
+    imagePosition: "50% 32%",
+    tech: ["Blockchain", "Smart Contracts", "NFTs", "IPFS"],
+    link: "https://block-ed.netlify.app/",
+    details:
+      "A blockchain-based course learning platform enabling secure, verifiable, and personalized learning certifications using smart contracts and decentralized storage.",
+  },
+  {
+    id: "kidbrace",
+    title: "CK KidBrace",
+    category: "IoT & Health",
+    description: "Smart wearable system for infant health monitoring.",
+    image: kidbraceImg,
+    imagePosition: "50% 58%",
+    tech: ["IoT Sensors", "Microcontroller", "Mobile App"],
+    details:
+      "A smart wearable system that monitors infant health parameters and sends real-time safety alerts to parents via a mobile application.",
+    outcome: "Real-time alerts & preventive child safety",
+  },
+  {
     id: "hydroguard",
-    title: "HydroGuard SkyDefender",
-    category: "Research / IPR",
-    description: "Homeostatic flying hovercraft for military and rescue missions.",
-    tech: ["IPR Publication", "Research", "Defence Tech"],
+    title: "Hydroguard / SkyDefender",
+    category: "SDG Ideathon 4.0 — 2nd Prize",
+    description:
+      "A hydrogen-powered defense drone designed for surveillance and emergency response, combining sustainable energy technology with autonomous aerial capabilities.",
+    image: hydroguardImg,
+    imagePosition: "50% 20%",
+    imageAlt: "SDG Ideathon 4.0 certificate of appreciation for Hydroguard / SkyDefender",
+    tech: ["Hydrogen Fuel Cell", "UAV", "IoT", "Embedded Systems", "Sustainable Technology"],
     details:
       "Published Sept 13, 2024 with the Office of the Controller General of Patents, Govt. of India. Paper: \"Homeostatic Flying Hovercraft: Efficient and Durable Solutions for Military and Rescue Missions.\"",
     outcome: "IPR Published",
     patentPdf: "/patent.pdf",
+    // LinkedIn post for the "View Achievement" button - never shown as text.
+    achievementLink: "",
   },
 ];
 
@@ -138,7 +291,7 @@ export const education = [
     year: "2023 – 2027",
     degree: "B.Tech – CS & Business Systems",
     school: "Sri Sairam Engineering College, West Tambaram, Chennai",
-    score: "GPA: 8.60 (up to IV semester)",
+    score: "GPA: 8.70 (up to IV semester)",
   },
   {
     year: "2022 – 2023",

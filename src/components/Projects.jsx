@@ -30,7 +30,8 @@ export default function Projects() {
       <div className="container">
         <Reveal>
           <span className="section-eyebrow">Projects</span>
-          <h2 className="section-title">Things I've built</h2>
+          <h2 className="section-title projects-title">Work I've Been Part Of</h2>
+          <p className="projects-subtitle">Projects, collaborations, and ideas I've contributed to.</p>
         </Reveal>
 
         <div className="projects-grid">
@@ -80,6 +81,11 @@ export default function Projects() {
                 {active.link && (
                   <a href={active.link} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
                     View Live <ExternalLink size={16} />
+                  </a>
+                )}
+                {active.achievementLink && (
+                  <a href={active.achievementLink} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+                    View Achievement <ExternalLink size={16} />
                   </a>
                 )}
                 {active.patentPdf && (

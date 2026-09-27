@@ -97,7 +97,7 @@ export default function Hero() {
           <motion.div
             className="hero-frame"
             role="img"
-            aria-label="Yogesh Odayar P S, chin resting on hand, rendered as a 3D holographic portrait with orbit rings"
+            aria-label="Yogesh Odayar P S as a 3D animated character in a black hoodie, hands clasped under his chin"
             initial={{ opacity: 0, scale: 1.08 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
@@ -105,7 +105,6 @@ export default function Hero() {
             <Suspense fallback={null}>
               <HeroPortraitScene />
             </Suspense>
-            <div className="hero-portrait-platform" aria-hidden="true" />
           </motion.div>
         </motion.div>
       </div>

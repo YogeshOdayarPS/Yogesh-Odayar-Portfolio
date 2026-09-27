@@ -1,5 +1,5 @@
 import { motion, useTransform } from "framer-motion";
-import { ExternalLink, HeartPulse, Link2, Globe, FlaskConical } from "lucide-react";
+import { ExternalLink, HeartPulse, Link2, Globe, FlaskConical, ShieldCheck } from "lucide-react";
 import useTilt from "../hooks/useTilt";
 
 const CATEGORY_ICON = {
@@ -7,6 +7,8 @@ const CATEGORY_ICON = {
   Blockchain: Link2,
   "Web3 Marketplace": Globe,
   "Research / IPR": FlaskConical,
+  "Statathon 2025 — Winner": ShieldCheck,
+  "SDG Ideathon 4.0 — 2nd Prize": FlaskConical,
 };
 
 export default function ProjectCard({ project, onOpen }) {
@@ -34,10 +36,23 @@ export default function ProjectCard({ project, onOpen }) {
       transition={{ duration: 0.5 }}
     >
       <div className="project-preview">
-        <motion.div className="project-preview-blob" style={{ x: blobX, y: blobY }} />
-        <motion.div className="project-preview-icon" style={{ x: iconX, y: iconY }}>
-          <Icon size={project.featured ? 56 : 42} strokeWidth={1.4} />
-        </motion.div>
+        {project.image ? (
+          <img
+            className="project-preview-img"
+            src={project.image}
+            alt={project.imageAlt ?? `${project.title} team`}
+            loading="lazy"
+            decoding="async"
+            style={{ objectPosition: project.imagePosition ?? "50% 50%" }}
+          />
+        ) : (
+          <>
+            <motion.div className="project-preview-blob" style={{ x: blobX, y: blobY }} />
+            <motion.div className="project-preview-icon" style={{ x: iconX, y: iconY }}>
+              <Icon size={project.featured ? 56 : 42} strokeWidth={1.4} />
+            </motion.div>
+          </>
+        )}
       </div>
 
       <div className="project-body">
@@ -56,6 +71,11 @@ export default function ProjectCard({ project, onOpen }) {
           {project.link && (
             <span className="project-live-hint">
               View live <ExternalLink size={13} />
+            </span>
+          )}
+          {project.achievementLink && (
+            <span className="project-live-hint">
+              View achievement <ExternalLink size={13} />
             </span>
           )}
         </div>
