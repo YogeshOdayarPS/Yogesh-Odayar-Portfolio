@@ -1,5 +1,5 @@
 import { motion, useTransform } from "framer-motion";
-import { ExternalLink, HeartPulse, Link2, Globe, FlaskConical, ShieldCheck } from "lucide-react";
+import { ExternalLink, FlaskConical, Globe, HeartPulse, Link2, ShieldCheck } from "lucide-react";
 import useTilt from "../hooks/useTilt";
 
 const CATEGORY_ICON = {
@@ -7,10 +7,12 @@ const CATEGORY_ICON = {
   Blockchain: Link2,
   "Web3 Marketplace": Globe,
   "Research / IPR": FlaskConical,
+  "IoT / Defense": FlaskConical,
   "Statathon 2025 — Winner": ShieldCheck,
-  "SDG Ideathon 4.0 — 2nd Prize": FlaskConical,
 };
 
+// Compact card - clicking it opens the project modal (Projects.jsx); the
+// card itself never expands.
 export default function ProjectCard({ project, onOpen }) {
   const strength = project.featured ? 10 : 6;
   const { ref, onMouseMove, onMouseLeave, tiltStyle, springX, springY } = useTilt({ strength });
@@ -24,10 +26,12 @@ export default function ProjectCard({ project, onOpen }) {
   return (
     <motion.button
       ref={ref}
+      type="button"
       className={`glass-card project-card ${project.featured ? "featured" : ""}`}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
       onClick={() => onOpen(project)}
+      aria-haspopup="dialog"
       style={tiltStyle}
       whileHover={{ y: -6 }}
       initial={{ opacity: 0, y: 20 }}
@@ -40,7 +44,7 @@ export default function ProjectCard({ project, onOpen }) {
           <img
             className="project-preview-img"
             src={project.image}
-            alt={project.imageAlt ?? `${project.title} team`}
+            alt={project.imageAlt ?? project.title}
             loading="lazy"
             decoding="async"
             style={{ objectPosition: project.imagePosition ?? "50% 50%" }}

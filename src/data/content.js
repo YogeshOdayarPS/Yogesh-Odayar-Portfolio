@@ -1,8 +1,12 @@
-import anvikshanImg from "../assets/projects/anvikshan.webp";
-import cblockImg from "../assets/projects/cblock.webp";
-import blockedImg from "../assets/projects/blocked.webp";
-import kidbraceImg from "../assets/projects/kidbrace.webp";
+import anvikshanImg from "../assets/projects/anvikshan-screen.webp";
+import cblockImg from "../assets/projects/cblock-screen.webp";
+import blockedImg from "../assets/projects/blocked-screen.webp";
+import kidbraceImg from "../assets/projects/kidbrace-screen.webp";
 import hydroguardImg from "../assets/projects/hydroguard.webp";
+import anvikshanTeam from "../assets/projects/anvikshan-team.webp";
+import cblockTeam from "../assets/projects/cblock-team.webp";
+import blockedTeam from "../assets/projects/blocked-team.webp";
+import kidbraceTeam from "../assets/projects/kidbrace-team.webp";
 
 export const personal = {
   name: "Yogesh Odayar P S",
@@ -209,6 +213,9 @@ export const leadership = {
   ],
 };
 
+// Projects. `image` is the card's top visual. Clicking a card opens a modal:
+// teamPhoto (optional) first, then category, title, details (or
+// description), outcome, tech and links. No teamPhoto = no Team area.
 export const projects = [
   {
     id: "anvikshan",
@@ -217,7 +224,9 @@ export const projects = [
     description:
       "A statistical data privacy evaluation and enforcement system for assessing disclosure risks and applying privacy-preserving techniques while preserving the utility of sensitive datasets.",
     image: anvikshanImg,
-    imagePosition: "50% 38%",
+    imageAlt: "ANVIKSHAN dashboard",
+    teamPhoto: anvikshanTeam,
+    teamPhotoPosition: "50% 38%",
     tech: [
       "Data Privacy",
       "Anonymisation",
@@ -234,14 +243,16 @@ export const projects = [
   {
     id: "cblock",
     title: "CBlock",
-    category: "Web3 Marketplace",
+    category: "Blockchain",
     description: "Decentralized carbon credit trading platform.",
     image: cblockImg,
-    imagePosition: "60% 40%",
-    tech: ["Blockchain", "Smart Contracts", "Web/Mobile App"],
+    imageAlt: "CBlock carbon trading platform",
+    teamPhoto: cblockTeam,
+    teamPhotoPosition: "60% 40%",
+    tech: ["Blockchain", "Smart Contracts", "Ethereum", "IPFS"],
     link: "https://cblock.vercel.app/",
     details:
-      "Decentralized carbon credit trading platform ensuring transparent issuance, verification, and trading of carbon credits. Cleared all internal SIH hackathon levels and submitted under AICTE student innovation.",
+      "A blockchain-based carbon credit marketplace designed to enable transparent and verifiable carbon credit trading.",
   },
   {
     id: "blocked",
@@ -249,7 +260,9 @@ export const projects = [
     category: "Blockchain",
     description: "NFT microcredential framework for secure, verifiable learning.",
     image: blockedImg,
-    imagePosition: "50% 32%",
+    imageAlt: "BlockED learning platform",
+    teamPhoto: blockedTeam,
+    teamPhotoPosition: "50% 32%",
     tech: ["Blockchain", "Smart Contracts", "NFTs", "IPFS"],
     link: "https://block-ed.netlify.app/",
     details:
@@ -261,7 +274,9 @@ export const projects = [
     category: "IoT & Health",
     description: "Smart wearable system for infant health monitoring.",
     image: kidbraceImg,
-    imagePosition: "50% 58%",
+    imageAlt: "CK KidBrace overview",
+    teamPhoto: kidbraceTeam,
+    teamPhotoPosition: "50% 58%",
     tech: ["IoT Sensors", "Microcontroller", "Mobile App"],
     details:
       "A smart wearable system that monitors infant health parameters and sends real-time safety alerts to parents via a mobile application.",
@@ -269,17 +284,15 @@ export const projects = [
   },
   {
     id: "hydroguard",
-    title: "Hydroguard / SkyDefender",
-    category: "SDG Ideathon 4.0 — 2nd Prize",
+    title: "HydroGuard / SkyDefender",
+    category: "IoT / Defense",
     description:
-      "A hydrogen-powered defense drone designed for surveillance and emergency response, combining sustainable energy technology with autonomous aerial capabilities.",
+      "A hydrogen-fuel-cell-powered defense drone concept designed for surveillance and safety applications.",
     image: hydroguardImg,
     imagePosition: "50% 20%",
-    imageAlt: "SDG Ideathon 4.0 certificate of appreciation for Hydroguard / SkyDefender",
-    tech: ["Hydrogen Fuel Cell", "UAV", "IoT", "Embedded Systems", "Sustainable Technology"],
-    details:
-      "Published Sept 13, 2024 with the Office of the Controller General of Patents, Govt. of India. Paper: \"Homeostatic Flying Hovercraft: Efficient and Durable Solutions for Military and Rescue Missions.\"",
-    outcome: "IPR Published",
+    imageAlt: "SDG Ideathon 4.0 certificate of appreciation for HydroGuard / SkyDefender",
+    tech: ["Hydrogen Fuel Cell", "Drone Technology", "IoT", "Surveillance"],
+    outcome: "2nd Prize — Sairam SDG Ideathon 4.0",
     patentPdf: "/patent.pdf",
     // LinkedIn post for the "View Achievement" button - never shown as text.
     achievementLink: "",
