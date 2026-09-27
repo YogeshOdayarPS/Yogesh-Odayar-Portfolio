@@ -6,7 +6,6 @@ import Projects from "./components/Projects";
 import Leadership from "./components/Leadership";
 import Achievements from "./components/Achievements";
 import Skills from "./components/Skills";
-import Education from "./components/Education";
 import Certifications from "./components/Certifications";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
@@ -21,12 +20,11 @@ function App() {
         <Hero />
         <About />
         <Experience />
+        <Skills />
+        <Certifications />
         <Projects />
         <Leadership />
         <Achievements />
-        <Skills />
-        <Education />
-        <Certifications />
         <Contact />
       </main>
       <Footer />

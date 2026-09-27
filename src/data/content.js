@@ -285,29 +285,6 @@ export const projects = [
     achievementLink: "",
   },
 ];
-
-export const education = [
-  {
-    year: "2023 – 2027",
-    degree: "B.Tech – CS & Business Systems",
-    school: "Sri Sairam Engineering College, West Tambaram, Chennai",
-    score: "GPA: 8.70 (up to IV semester)",
-  },
-  {
-    year: "2022 – 2023",
-    degree: "HSC",
-    school: "Sri Sankara Matriculation Higher Secondary School, Thiruvanmiyur, Chennai",
-    score: "Score: 92.66%",
-  },
-  {
-    year: "Completed",
-    degree: "Praveen Uttarardh in Hindi (Full Course)",
-    school: "Dakshin Bharat Hindi Prachar Sabha (DBHPS), Chennai",
-    description: "Completed the full Hindi exam series up to Praveen Uttarardh.",
-    score: "Equivalent to B.A. (Hindi); recognized by Central & State Governments",
-  },
-];
-
 const ACHV_IMG = "/achievements/";
 
 export const achievements = [
@@ -488,14 +465,13 @@ export const achievements = [
   },
 ];
 
-// Navbar order (desktop + mobile). Labels can differ from section names:
-// "Tech" -> Skills section, "Hackathons" -> Achievements section.
-// Education stays on the page but is intentionally not in the nav.
+// Navbar order (desktop + mobile) - must match the section order in App.jsx.
+// "Tech Stack" -> #skills, "Hackathons" -> #achievements.
 export const navSections = [
   { id: "home", label: "Home" },
   { id: "about", label: "About" },
   { id: "experience", label: "Experience" },
-  { id: "skills", label: "Tech" },
+  { id: "skills", label: "Tech Stack" },
   { id: "certifications", label: "Certifications" },
   { id: "projects", label: "Projects" },
   { id: "leadership", label: "Leadership" },
