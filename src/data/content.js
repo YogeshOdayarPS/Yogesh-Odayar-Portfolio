@@ -27,7 +27,7 @@ export const about = {
     { label: "GPA", value: "8.70" },
     { label: "Hackathon Wins", value: "5+" },
     { label: "IEEE Roles", value: "4" },
-    { label: "Published Patent", value: "1" },
+    { label: "Published Patents", value: "2" },
   ],
 };
 

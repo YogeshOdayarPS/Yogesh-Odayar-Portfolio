@@ -3,6 +3,7 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { useReducedMotion } from "framer-motion";
 import characterTexUrl from "../../assets/hero-character-3d.webp";
+import useInViewport from "../../hooks/useInViewport";
 
 // The cutout has a real per-pixel alpha (background, desk and props
 // removed offline, lower body faded out) - so the character sits straight
@@ -97,6 +98,9 @@ function Character({ texture, animate }) {
 export default function HeroPortraitScene() {
   const reducedMotion = useReducedMotion();
   const [texture, setTexture] = useState(null);
+  const wrapRef = useRef(null);
+  // Stop rendering once the hero is scrolled out of view.
+  const inView = useInViewport(wrapRef);
 
   useEffect(() => {
     let cancelled = false;
@@ -112,16 +116,19 @@ export default function HeroPortraitScene() {
     };
   }, []);
 
-  if (!texture) return null;
-
   return (
-    <Canvas
-      dpr={[1, 1.75]}
-      gl={{ antialias: true, alpha: true, powerPreference: "low-power" }}
-      camera={{ position: [0, 0, CAMERA_DISTANCE], fov: CAMERA_FOV }}
-      style={{ position: "absolute", inset: 0, pointerEvents: "none" }}
-    >
-      <Character texture={texture} animate={!reducedMotion} />
-    </Canvas>
+    <div ref={wrapRef} style={{ position: "absolute", inset: 0, pointerEvents: "none" }}>
+      {texture && (
+        <Canvas
+          frameloop={inView ? "always" : "never"}
+          dpr={[1, 1.75]}
+          gl={{ antialias: true, alpha: true, powerPreference: "low-power" }}
+          camera={{ position: [0, 0, CAMERA_DISTANCE], fov: CAMERA_FOV }}
+          style={{ pointerEvents: "none" }}
+        >
+          <Character texture={texture} animate={!reducedMotion} />
+        </Canvas>
+      )}
+    </div>
   );
 }

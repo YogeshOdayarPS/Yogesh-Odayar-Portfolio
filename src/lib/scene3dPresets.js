@@ -8,8 +8,21 @@ export const projectsShapes = [
   { geometry: "icosahedron", position: [5.2, -2.2, -3.5], size: 0.75, speed: 0.05, color: "#5b7fff", opacity: 0.18 },
 ];
 
+// Contact shapes are placed at runtime (Contact.jsx) in the free space
+// around the contact content, so they never sit over the text or cards.
+// `place` lists preferred spots in order: a zone beside/above/below the
+// content and where along it (0-1). The first spot the shape fits in wins.
 export const contactShapes = [
-  { geometry: "icosahedron", position: [-3.8, 1.8, -2], size: 0.75, speed: 0.05, color: "#5b7fff", opacity: 0.28 },
-  { geometry: "torus", position: [3.8, -1.4, -2.5], size: 0.65, speed: 0.06, color: "#9b6bff", opacity: 0.26 },
-  { geometry: "tetrahedron", position: [0, 2.6, -3], size: 0.5, speed: 0.065, color: "#9b6bff", opacity: 0.2 },
+  {
+    geometry: "icosahedron", z: -2, size: 0.75, speed: 0.05, color: "#5b7fff", opacity: 0.28,
+    place: [{ zone: "left", at: 0.3 }, { zone: "top", at: 0.14 }],
+  },
+  {
+    geometry: "torus", z: -2.5, size: 0.65, speed: 0.06, color: "#9b6bff", opacity: 0.26,
+    place: [{ zone: "right", at: 0.78 }, { zone: "bottom", at: 0.86 }],
+  },
+  {
+    geometry: "tetrahedron", z: -3, size: 0.5, speed: 0.065, color: "#9b6bff", opacity: 0.2,
+    place: [{ zone: "top", at: 0.5 }, { zone: "top", at: 0.86 }],
+  },
 ];

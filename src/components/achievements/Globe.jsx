@@ -1,6 +1,7 @@
 import { useMemo, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
+import useInViewport from "../../hooks/useInViewport";
 
 const CORE_RADIUS = 1.6;
 
@@ -191,19 +192,25 @@ function Particles({ count }) {
 
 export default function Globe({ quality = "high", scrollProgress }) {
   const particleCount = quality === "low" ? 45 : 120;
+  const wrapRef = useRef(null);
+  // Stop rendering while the globe is scrolled out of view.
+  const inView = useInViewport(wrapRef);
 
   if (!scrollProgress) return null;
 
   return (
-    <Canvas
-      dpr={[1, quality === "low" ? 1.2 : 1.6]}
-      gl={{ antialias: true, alpha: true, powerPreference: "low-power" }}
-      camera={{ position: [0, 0, 7], fov: 42 }}
-      style={{ position: "absolute", inset: 0, pointerEvents: "none" }}
-    >
-      <HoloGlobe scrollProgress={scrollProgress} quality={quality} />
-      <OrbitRings quality={quality} />
-      <Particles count={particleCount} />
-    </Canvas>
+    <div ref={wrapRef} style={{ position: "absolute", inset: 0, pointerEvents: "none" }}>
+      <Canvas
+        frameloop={inView ? "always" : "never"}
+        dpr={[1, quality === "low" ? 1.2 : 1.6]}
+        gl={{ antialias: true, alpha: true, powerPreference: "low-power" }}
+        camera={{ position: [0, 0, 7], fov: 42 }}
+        style={{ pointerEvents: "none" }}
+      >
+        <HoloGlobe scrollProgress={scrollProgress} quality={quality} />
+        <OrbitRings quality={quality} />
+        <Particles count={particleCount} />
+      </Canvas>
+    </div>
   );
 }

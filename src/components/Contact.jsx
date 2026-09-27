@@ -1,9 +1,10 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, ArrowUpRight } from "lucide-react";
 import { GithubGlyph, LinkedinGlyph } from "./icons/BrandIcons";
 import { personal } from "../data/content";
 import { contactShapes } from "../lib/scene3dPresets";
+import placeShapes from "../lib/placeShapes";
 import "./Contact.css";
 
 const Scene3D = lazy(() => import("./Scene3D"));
@@ -24,12 +25,61 @@ const item = {
   whileInView: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } },
 };
 
+// Layout offset of `el` inside `ancestor`, ignoring transforms - so the
+// panel's entrance animation doesn't skew the measurement.
+function offsetWithin(el, ancestor) {
+  let x = 0;
+  let y = 0;
+  for (let node = el; node && node !== ancestor; node = node.offsetParent) {
+    x += node.offsetLeft;
+    y += node.offsetTop;
+  }
+  return { x, y };
+}
+
+const CONTENT_MARGIN = 14;
+
+// Keeps the decorative shapes in the empty space around the contact text
+// and cards, re-placing them whenever the section or content resizes.
+function useContactShapes(sectionRef, contentRef) {
+  const [shapes, setShapes] = useState(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    const content = contentRef.current;
+    if (!section || !content) return undefined;
+
+    const update = () => {
+      const { x, y } = offsetWithin(content, section);
+      const box = {
+        left: x - CONTENT_MARGIN,
+        top: y - CONTENT_MARGIN,
+        right: x + content.offsetWidth + CONTENT_MARGIN,
+        bottom: y + content.offsetHeight + CONTENT_MARGIN,
+      };
+      setShapes(placeShapes(contactShapes, section.clientWidth, section.clientHeight, box));
+    };
+
+    const observer = new ResizeObserver(update);
+    observer.observe(section);
+    observer.observe(content);
+    return () => observer.disconnect();
+  }, [sectionRef, contentRef]);
+
+  return shapes;
+}
+
 export default function Contact() {
+  const sectionRef = useRef(null);
+  const contentRef = useRef(null);
+  const shapes = useContactShapes(sectionRef, contentRef);
+
   return (
-    <section id="contact" className="section contact-section">
+    <section id="contact" className="section contact-section" ref={sectionRef}>
       <div className="contact-glow" aria-hidden="true" />
       <Suspense fallback={null}>
-        <Scene3D shapes={contactShapes} className="contact-scene3d" />
+        {/* No pointer tilt here: it would swing the shapes toward the cards. */}
+        <Scene3D shapes={shapes} followPointer={false} className="contact-scene3d" />
       </Suspense>
 
       <div className="container">
@@ -41,6 +91,7 @@ export default function Contact() {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
           <motion.div
+            ref={contentRef}
             variants={container}
             initial="initial"
             whileInView="whileInView"

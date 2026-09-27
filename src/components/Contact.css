@@ -13,6 +13,7 @@
 
 .contact-scene3d {
   z-index: 0 !important;
+  pointer-events: none;
 }
 
 .contact-section .container {
@@ -45,6 +46,10 @@
 }
 
 .contact-item {
+  /* Own stacking context, always above the decorative 3D layer. */
+  position: relative;
+  z-index: 1;
+  isolation: isolate;
   display: flex;
   align-items: center;
   gap: 1rem;

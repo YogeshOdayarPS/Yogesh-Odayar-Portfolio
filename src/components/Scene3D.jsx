@@ -1,8 +1,9 @@
 import { useRef, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useReducedMotion } from "framer-motion";
+import useInViewport from "../hooks/useInViewport";
 
-function FloatingShape({ geometry, position, size, speed, color, opacity = 0.3 }) {
+function FloatingShape({ geometry, position, size, speed, color, opacity = 0.3, float = 0.2 }) {
   const meshRef = useRef(null);
   const seed = useMemo(() => Math.random() * 100, []);
 
@@ -11,7 +12,7 @@ function FloatingShape({ geometry, position, size, speed, color, opacity = 0.3 }
     const t = state.clock.getElapsedTime();
     meshRef.current.rotation.x = t * speed;
     meshRef.current.rotation.y = t * speed * 1.3;
-    meshRef.current.position.y = position[1] + Math.sin(t * 0.3 + seed) * 0.2;
+    meshRef.current.position.y = position[1] + Math.sin(t * 0.3 + seed) * float;
   });
 
   const geo = (() => {
@@ -50,6 +51,9 @@ function PointerRig({ children, intensity = 0.25 }) {
 
 export default function Scene3D({ shapes, followPointer = true, className = "" }) {
   const prefersReducedMotion = useReducedMotion();
+  const wrapRef = useRef(null);
+  // Only render frames while the section is on screen.
+  const inView = useInViewport(wrapRef);
 
   if (prefersReducedMotion || !shapes?.length) return null;
 
@@ -62,14 +66,21 @@ export default function Scene3D({ shapes, followPointer = true, className = "" }
   );
 
   return (
-    <Canvas
+    <div
+      ref={wrapRef}
       className={`scene3d-canvas ${className}`}
-      dpr={[1, 1.5]}
-      gl={{ antialias: true, alpha: true, powerPreference: "low-power" }}
-      camera={{ position: [0, 0, 8], fov: 50 }}
       style={{ position: "absolute", inset: 0, zIndex: 0, pointerEvents: "none" }}
+      aria-hidden="true"
     >
-      {followPointer ? <PointerRig>{content}</PointerRig> : content}
-    </Canvas>
+      <Canvas
+        frameloop={inView ? "always" : "never"}
+        dpr={[1, 1.5]}
+        gl={{ antialias: true, alpha: true, powerPreference: "low-power" }}
+        camera={{ position: [0, 0, 8], fov: 50 }}
+        style={{ pointerEvents: "none" }}
+      >
+        {followPointer ? <PointerRig>{content}</PointerRig> : content}
+      </Canvas>
+    </div>
   );
 }

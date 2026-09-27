@@ -11,6 +11,9 @@
   border-radius: 50%;
   filter: blur(90px);
   opacity: 0.55;
+  /* Own compositor layer: the blur is rasterised once and the drift
+     animation only moves it, instead of re-blurring every frame. */
+  will-change: transform;
 }
 
 .bg-glow-a {
