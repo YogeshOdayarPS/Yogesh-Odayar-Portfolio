@@ -1,10 +1,17 @@
 /* "What I Work With" - a Y and an O built from flip-to-reveal tech icons.
-   Black + teal is scoped to this section on purpose. */
+   Navy + electric blue/purple, matching the rest of the site. */
 
 .skills-section {
-  --teal: #409c8c;
-  --teal-light: #7fd3c3;
-  --teal-glow: rgba(64, 156, 140, 0.35);
+  --yo-bg: #05070d;
+  --yo-blue: #5277ff;
+  --yo-blue-bright: #3b82f6;
+  --yo-purple: #8b5cf6;
+  --yo-heading: #f5f7ff;
+  --yo-text: #a6b0c8;
+  --yo-border: rgba(100, 125, 255, 0.28);
+  --yo-holder: rgba(32, 49, 91, 0.35);
+  --yo-glow: rgba(82, 119, 255, 0.22);
+  --yo-glow-purple: rgba(139, 92, 246, 0.16);
 
   min-height: 100svh;
   display: flex;
@@ -12,8 +19,10 @@
   /* top padding clears the sticky navbar when jumped to from the nav */
   padding: 5rem 0 2rem;
   background:
-    radial-gradient(ellipse 60% 38% at 50% 100%, rgba(64, 156, 140, 0.1), transparent 70%),
-    #000;
+    radial-gradient(ellipse 45% 40% at 30% 58%, rgba(82, 119, 255, 0.09), transparent 70%),
+    radial-gradient(ellipse 40% 42% at 70% 55%, rgba(139, 92, 246, 0.08), transparent 70%),
+    radial-gradient(ellipse 60% 30% at 50% 100%, rgba(59, 130, 246, 0.07), transparent 70%),
+    var(--yo-bg);
   overflow-x: clip;
 }
 
@@ -33,7 +42,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.9rem;
-  color: var(--teal);
+  color: var(--yo-blue);
   letter-spacing: 0.3em;
   margin-bottom: 0.6rem;
 }
@@ -43,16 +52,16 @@
   content: "";
   width: 2.5rem;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--teal));
+  background: linear-gradient(90deg, transparent, var(--yo-blue));
 }
 
 .skills-eyebrow::after {
-  background: linear-gradient(90deg, var(--teal), transparent);
+  background: linear-gradient(90deg, var(--yo-purple), transparent);
 }
 
 .skills-title {
   margin-bottom: 0;
-  color: #fff;
+  color: var(--yo-heading);
   font-size: clamp(2rem, 3.4vw, 3rem);
   letter-spacing: -0.01em;
 }
@@ -84,26 +93,26 @@
   fill: none;
   stroke-linecap: round;
   stroke-linejoin: round;
-  filter: drop-shadow(0 0 14px rgba(64, 156, 140, 0.18));
+  filter: drop-shadow(0 0 14px var(--yo-glow));
 }
 
 .yo-track-edge {
-  stroke: rgba(64, 156, 140, 0.34);
+  stroke: rgba(100, 125, 255, 0.38);
   stroke-width: 187;
 }
 
 .yo-track-body {
-  stroke: #030807;
+  stroke: #060915;
   stroke-width: 182;
 }
 
 .yo-track-tint {
-  stroke: rgba(64, 156, 140, 0.05);
+  stroke: rgba(82, 119, 255, 0.05);
   stroke-width: 182;
 }
 
 .yo-track-line {
-  stroke: rgba(64, 156, 140, 0.3);
+  stroke: rgba(100, 125, 255, 0.34);
   stroke-width: 2;
   stroke-dasharray: 3 10;
 }
@@ -183,17 +192,16 @@
   display: grid;
   place-items: center;
   border-radius: 50%;
-  border: 1.5px solid rgba(64, 156, 140, 0.75);
-  background: radial-gradient(
-    circle at 32% 26%,
-    rgba(127, 211, 195, 0.3),
-    rgba(64, 156, 140, 0.16) 45%,
-    rgba(6, 22, 19, 0.94) 78%
-  );
+  border: 1.5px solid rgba(100, 125, 255, 0.55);
+  background:
+    radial-gradient(circle at 32% 26%, rgba(125, 150, 255, 0.24), transparent 55%),
+    radial-gradient(circle at 70% 85%, var(--yo-glow-purple), transparent 60%),
+    var(--yo-holder);
   box-shadow:
-    0 0 calc(var(--d) * 0.22) var(--teal-glow),
+    0 0 calc(var(--d) * 0.22) var(--yo-glow),
     inset 0 1px 0 rgba(255, 255, 255, 0.14),
     inset 0 -0.5rem 1.1rem rgba(0, 0, 0, 0.45);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .tech-front svg {
@@ -215,11 +223,12 @@
   gap: 0.6rem;
   padding: 0.8rem 0.95rem 0.9rem;
   border-radius: 14px;
-  border: 1px solid rgba(64, 156, 140, 0.55);
-  background: linear-gradient(160deg, rgba(14, 30, 27, 0.97), rgba(6, 12, 11, 0.98));
+  border: 1px solid var(--yo-border);
+  background: linear-gradient(160deg, rgba(17, 25, 52, 0.97), rgba(7, 10, 22, 0.98));
   box-shadow:
     0 12px 30px rgba(0, 0, 0, 0.6),
-    0 0 22px rgba(64, 156, 140, 0.22);
+    0 0 22px var(--yo-glow),
+    0 0 34px var(--yo-glow-purple);
   text-align: left;
   transform: translate(-50%, -50%) rotateY(180deg);
   pointer-events: none;
@@ -247,14 +256,14 @@
   font-family: var(--font-display);
   font-size: 0.95rem;
   font-weight: 600;
-  color: #fff;
+  color: var(--yo-heading);
   white-space: nowrap;
 }
 
 .tech-level {
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--teal-light);
+  color: #8fa6ff;
   font-variant-numeric: tabular-nums;
 }
 
@@ -271,7 +280,7 @@
   width: 0;
   height: 100%;
   border-radius: inherit;
-  background: linear-gradient(90deg, #2f7e70, var(--teal), var(--teal-light));
+  background: linear-gradient(90deg, var(--yo-blue-bright), var(--yo-blue), var(--yo-purple));
   transition: width 0.6s ease 0.2s;
 }
 
@@ -303,7 +312,7 @@
 }
 
 .tech-btn:focus-visible .tech-back {
-  outline: 2px solid var(--teal-light);
+  outline: 2px solid var(--yo-blue);
   outline-offset: 3px;
 }
 
@@ -318,6 +327,13 @@
 
   .tech-item:hover .tech-inner {
     transform: rotateY(180deg);
+  }
+
+  .tech-item:hover .tech-front {
+    border-color: rgba(139, 92, 246, 0.6);
+    box-shadow:
+      0 0 calc(var(--d) * 0.28) var(--yo-glow),
+      0 0 calc(var(--d) * 0.4) var(--yo-glow-purple);
   }
 
   .tech-item:hover .tech-back {
