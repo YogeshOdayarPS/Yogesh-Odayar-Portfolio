@@ -1,32 +1,393 @@
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.25rem;
-}
+/* "What I Work With" - a Y and an O built from flip-to-reveal tech icons.
+   Black + teal is scoped to this section on purpose. */
 
-.skill-card {
-  padding: 1.5rem;
-}
+.skills-section {
+  --teal: #409c8c;
+  --teal-light: #7fd3c3;
+  --teal-glow: rgba(64, 156, 140, 0.35);
 
-.skill-card-title {
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  color: var(--text);
-}
-
-.skill-tags {
+  min-height: 100svh;
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+  align-items: center;
+  /* top padding clears the sticky navbar when jumped to from the nav */
+  padding: 5rem 0 2rem;
+  background:
+    radial-gradient(ellipse 60% 38% at 50% 100%, rgba(64, 156, 140, 0.1), transparent 70%),
+    #000;
+  overflow-x: clip;
 }
 
-.skill-tag {
-  transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+.skills-container {
+  container-type: inline-size;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.skill-tag:hover {
-  transform: translateY(-2px);
-  border-color: var(--accent);
-  color: var(--text);
+.skills-heading {
+  text-align: center;
+  margin-bottom: clamp(1.25rem, 4svh, 2.75rem);
+}
+
+.skills-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  color: var(--teal);
+  letter-spacing: 0.3em;
+  margin-bottom: 0.6rem;
+}
+
+.skills-eyebrow::before,
+.skills-eyebrow::after {
+  content: "";
+  width: 2.5rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--teal));
+}
+
+.skills-eyebrow::after {
+  background: linear-gradient(90deg, var(--teal), transparent);
+}
+
+.skills-title {
+  margin-bottom: 0;
+  color: #fff;
+  font-size: clamp(2rem, 3.4vw, 3rem);
+  letter-spacing: -0.01em;
+}
+
+/* ---- Stage: letter height drives everything (icons are 15% of it) ---- */
+
+.yo-stage {
+  /* fits the viewport height and the container width (letters + gap = 1.66h) */
+  --yo-h: clamp(20rem, min(calc(100svh - 15rem), calc(100cqw / 1.66)), 46rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--yo-h) * 0.08);
+}
+
+.yo-letter {
+  --d: calc(var(--yo-h) * 0.15);
+  position: relative;
+  flex: none;
+  height: var(--yo-h);
+}
+
+.yo-track {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 14px rgba(64, 156, 140, 0.18));
+}
+
+.yo-track-edge {
+  stroke: rgba(64, 156, 140, 0.34);
+  stroke-width: 187;
+}
+
+.yo-track-body {
+  stroke: #030807;
+  stroke-width: 182;
+}
+
+.yo-track-tint {
+  stroke: rgba(64, 156, 140, 0.05);
+  stroke-width: 182;
+}
+
+.yo-track-line {
+  stroke: rgba(64, 156, 140, 0.3);
+  stroke-width: 2;
+  stroke-dasharray: 3 10;
+}
+
+.yo-icons {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ---- Icon ---- */
+
+.tech-item {
+  position: absolute;
+  z-index: 1;
+  width: var(--d);
+  height: var(--d);
+  transform: translate(-50%, -50%);
+}
+
+.tech-float {
+  width: 100%;
+  height: 100%;
+  animation: tech-float 6s ease-in-out infinite;
+  animation-delay: var(--float-delay, 0s);
+}
+
+@keyframes tech-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.tech-btn {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  perspective: 900px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tech-btn:focus-visible {
+  outline: none;
+}
+
+.tech-inner {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.tech-front,
+.tech-back {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.tech-front {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1.5px solid rgba(64, 156, 140, 0.75);
+  background: radial-gradient(
+    circle at 32% 26%,
+    rgba(127, 211, 195, 0.3),
+    rgba(64, 156, 140, 0.16) 45%,
+    rgba(6, 22, 19, 0.94) 78%
+  );
+  box-shadow:
+    0 0 calc(var(--d) * 0.22) var(--teal-glow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    inset 0 -0.5rem 1.1rem rgba(0, 0, 0, 0.45);
+}
+
+.tech-front svg {
+  width: 50%;
+  height: 50%;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.45));
+}
+
+/* The card is wider than the circle, so it is positioned around the
+   circle's centre. Because the parent turns 180deg, the start/end variants
+   are mirrored here and land the right way round once flipped. */
+.tech-back {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: clamp(10.5rem, calc(var(--d) * 2.2), 14rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 0.8rem 0.95rem 0.9rem;
+  border-radius: 14px;
+  border: 1px solid rgba(64, 156, 140, 0.55);
+  background: linear-gradient(160deg, rgba(14, 30, 27, 0.97), rgba(6, 12, 11, 0.98));
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.6),
+    0 0 22px rgba(64, 156, 140, 0.22);
+  text-align: left;
+  transform: translate(-50%, -50%) rotateY(180deg);
+  pointer-events: none;
+}
+
+.tech-back[data-align="start"] {
+  left: auto;
+  right: 0;
+  transform: translateY(-50%) rotateY(180deg);
+}
+
+.tech-back[data-align="end"] {
+  left: 0;
+  transform: translateY(-50%) rotateY(180deg);
+}
+
+.tech-back-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.tech-name {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.tech-level {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--teal-light);
+  font-variant-numeric: tabular-nums;
+}
+
+.tech-bar {
+  display: block;
+  height: 5px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.tech-bar-fill {
+  display: block;
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #2f7e70, var(--teal), var(--teal-light));
+  transition: width 0.6s ease 0.2s;
+}
+
+/* ---- Flipped: hover (real pointers), keyboard focus, or tapped ---- */
+
+.tech-item[data-active],
+.tech-item:focus-within {
+  z-index: 10;
+}
+
+.tech-item[data-active] .tech-float,
+.tech-item:focus-within .tech-float {
+  animation-play-state: paused;
+}
+
+.tech-item[data-active] .tech-inner,
+.tech-btn:focus-visible .tech-inner {
+  transform: rotateY(180deg);
+}
+
+.tech-item[data-active] .tech-back,
+.tech-btn:focus-visible .tech-back {
+  pointer-events: auto;
+}
+
+.tech-item[data-active] .tech-bar-fill,
+.tech-btn:focus-visible .tech-bar-fill {
+  width: calc(var(--level) * 100%);
+}
+
+.tech-btn:focus-visible .tech-back {
+  outline: 2px solid var(--teal-light);
+  outline-offset: 3px;
+}
+
+@media (hover: hover) {
+  .tech-item:hover {
+    z-index: 10;
+  }
+
+  .tech-item:hover .tech-float {
+    animation-play-state: paused;
+  }
+
+  .tech-item:hover .tech-inner {
+    transform: rotateY(180deg);
+  }
+
+  .tech-item:hover .tech-back {
+    pointer-events: auto;
+  }
+
+  .tech-item:hover .tech-bar-fill {
+    width: calc(var(--level) * 100%);
+  }
+}
+
+/* ---- Phones: stack Y above O ---- */
+
+@media (max-width: 640px) {
+  .skills-section {
+    min-height: auto;
+    padding-bottom: 3.5rem;
+  }
+
+  .yo-stage {
+    --yo-h: min(calc(100cqw / 0.9), 26rem);
+    flex-direction: column;
+    gap: 1.75rem;
+  }
+}
+
+/* ---- Reduced motion: no flip or float, the card simply fades in ---- */
+
+@media (prefers-reduced-motion: reduce) {
+  .tech-float {
+    animation: none;
+  }
+
+  .tech-inner,
+  .tech-item[data-active] .tech-inner,
+  .tech-btn:focus-visible .tech-inner,
+  .tech-item:hover .tech-inner {
+    transform: none;
+    transition: none;
+  }
+
+  .tech-back,
+  .tech-back[data-align] {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .tech-back {
+    transform: translate(-50%, -50%);
+  }
+
+  .tech-back[data-align="start"] {
+    left: 0;
+    right: auto;
+    transform: translateY(-50%);
+  }
+
+  .tech-back[data-align="end"] {
+    left: auto;
+    right: 0;
+    transform: translateY(-50%);
+  }
+
+  .tech-item[data-active] .tech-back,
+  .tech-btn:focus-visible .tech-back,
+  .tech-item:hover .tech-back {
+    opacity: 1;
+  }
+
+  .tech-bar-fill {
+    transition: none;
+  }
 }

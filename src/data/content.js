@@ -35,21 +35,33 @@ export const about = {
   ],
 };
 
-export const skillGroups = [
-  { title: "Programming", skills: ["Java", "Python", "JavaScript", "C"] },
-  { title: "Frontend", skills: ["React", "HTML", "CSS", "Flutter"] },
-  { title: "Backend & Database", skills: ["Node.js", "MySQL"] },
-  { title: "Tools", skills: ["Git", "GitHub", "VS Code", "Power BI", "Excel"] },
-  {
-    title: "Relevant Coursework",
-    skills: ["DSA", "DBMS", "Cloud Computing", "Web Technologies", "OOPS"],
-  },
-  { title: "Interests", skills: ["Data Science", "Blockchain", "Machine Learning", "AI"] },
-  {
-    title: "Soft Skills",
-    skills: ["Problem Solving", "Leadership", "Critical Thinking", "Adaptability"],
-  },
-];
+// Tech Stack - the "Y O" icon composition in Skills.jsx.
+// - icon is a key into TECH_ICONS in Skills.jsx.
+// - level is the proficiency % shown on hover (edit freely).
+// - Array order = position in the letter, so keep the counts (7 + 8):
+//   Y: left arm top->down, right arm top->down, fork, stem top->down.
+//   O: clockwise from 12 o'clock.
+export const techStack = {
+  Y: [
+    { name: "Java", icon: "java", level: 80 },
+    { name: "Python", icon: "python", level: 80 },
+    { name: "C", icon: "c", level: 65 },
+    { name: "JavaScript", icon: "javascript", level: 80 },
+    { name: "HTML5", icon: "html5", level: 85 },
+    { name: "CSS3", icon: "css3", level: 80 },
+    { name: "React.js", icon: "react", level: 75 },
+  ],
+  O: [
+    { name: "Flutter", icon: "flutter", level: 70 },
+    { name: "Node.js", icon: "node", level: 75 },
+    { name: "MySQL", icon: "mysql", level: 75 },
+    { name: "Excel", icon: "excel", level: 75 },
+    { name: "Power BI", icon: "powerbi", level: 75 },
+    { name: "VS Code", icon: "vscode", level: 90 },
+    { name: "GitHub", icon: "github", level: 85 },
+    { name: "Git", icon: "git", level: 80 },
+  ],
+};
 
 // Certifications & Coursework - cards render in this exact order.
 // - icon / courses[].icon are keys into CERT_ICONS in Certifications.jsx.
