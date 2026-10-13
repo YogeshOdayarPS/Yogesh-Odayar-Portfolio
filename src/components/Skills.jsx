@@ -8,14 +8,14 @@ import {
   JavaLogoIcon,
   PythonLogoIcon,
   GitIcon,
-  CIcon,
   ReactIcon,
-  FlutterIcon,
   NodeIcon,
   MySqlIcon,
   GithubIcon,
   VsCodeIcon,
-  PowerBiIcon,
+  PostgreSqlIcon,
+  CloudComputingIcon,
+  MachineLearningIcon,
   ExcelIcon,
 } from "./icons/TechIcons";
 import "./Skills.css";
@@ -23,16 +23,16 @@ import "./Skills.css";
 const TECH_ICONS = {
   java: JavaLogoIcon,
   python: PythonLogoIcon,
-  c: CIcon,
+  cloud: CloudComputingIcon,
   javascript: JavaScriptIcon,
   html5: Html5Icon,
   css3: Css3Icon,
   react: ReactIcon,
-  flutter: FlutterIcon,
+  ml: MachineLearningIcon,
   node: NodeIcon,
   mysql: MySqlIcon,
   excel: ExcelIcon,
-  powerbi: PowerBiIcon,
+  postgresql: PostgreSqlIcon,
   vscode: VsCodeIcon,
   github: GithubIcon,
   git: GitIcon,
@@ -62,22 +62,105 @@ const oSlots = (count) =>
     return [O_CENTER[0] + O_RADIUS * Math.cos(a), O_CENTER[1] + O_RADIUS * Math.sin(a)];
   });
 
-// Icons near a letter's outer edge open their card inwards so it never
-// runs off narrow screens.
-function alignFor(x, boxW) {
-  if (x < boxW * 0.25) return "start";
-  if (x > boxW * 0.75) return "end";
-  return "center";
+// ---- Proficiency card placement ----
+// The card sits beside its icon on whichever side fits best: each side is
+// scored by how much it would cover other icons, with sides pointing away
+// from the letter's centre preferred, and sides that leave the viewport
+// ruled out. The card is then nudged along that side to stay on screen.
+const CARD_GAP = 14;
+const EDGE = 12;
+
+// How far a circular icon reaches into a card, squared so a deep overlap
+// costs much more than a graze.
+function intrusion(rect, c) {
+  const nx = Math.max(rect.left, Math.min(c.x, rect.right));
+  const ny = Math.max(rect.top, Math.min(c.y, rect.bottom));
+  const depth = c.r + 6 - Math.hypot(nx - c.x, ny - c.y);
+  return depth > 0 ? depth * depth * 8 : 0;
+}
+
+function placeCard(item, card, dx, dy) {
+  const icon = item.querySelector(".tech-btn").getBoundingClientRect();
+  const w = card.offsetWidth;
+  const h = card.offsetHeight;
+  const cx = icon.left + icon.width / 2;
+  const cy = icon.top + icon.height / 2;
+  const vw = document.documentElement.clientWidth;
+  const vh = window.innerHeight;
+  const navBottom = document.querySelector(".navbar")?.getBoundingClientRect().bottom ?? 0;
+  const minY = Math.max(EDGE, navBottom + 8);
+  const maxY = vh - EDGE;
+  const others = [...document.querySelectorAll(".tech-item .tech-btn")]
+    .filter((el) => !item.contains(el))
+    .map((el) => {
+      const r = el.getBoundingClientRect();
+      return { x: r.left + r.width / 2, y: r.top + r.height / 2, r: r.width / 2 };
+    });
+
+  const clamp = (v, lo, hi) => Math.min(Math.max(v, lo), Math.max(lo, hi));
+  // Centred on the icon by default; a card may slide part-way along its side
+  // (staying level with the icon) when that clears a neighbouring icon.
+  const SLIDES = [0, -0.3, 0.3, -0.5, 0.5, -0.75, 0.75];
+  const candidates = [
+    { side: "right", pref: dx, left: icon.right + CARD_GAP, top: cy - h / 2 },
+    { side: "left", pref: -dx, left: icon.left - CARD_GAP - w, top: cy - h / 2 },
+    { side: "top", pref: -dy * 0.6, left: cx - w / 2, top: icon.top - CARD_GAP - h },
+    { side: "bottom", pref: dy * 0.6, left: cx - w / 2, top: icon.bottom + CARD_GAP },
+  ].flatMap((c) =>
+    SLIDES.map((slide) => {
+      const horizontal = c.side === "left" || c.side === "right";
+      const slidePx = slide * (horizontal ? h : w);
+      // Also slide as needed to stay on screen, but never so far that the
+      // card stops lining up with the icon's centre - another side wins then.
+      const left = horizontal
+        ? c.left
+        : clamp(clamp(c.left + slidePx, EDGE, vw - EDGE - w), cx - w + 24, cx - 24);
+      const top = horizontal
+        ? clamp(clamp(c.top + slidePx, minY, maxY - h), cy - h + 12, cy - 12)
+        : c.top;
+      const rect = { left, top, right: left + w, bottom: top + h };
+      const offscreen =
+        rect.left < EDGE || rect.right > vw - EDGE || rect.top < minY || rect.bottom > maxY;
+      const covered = others.reduce((sum, c) => sum + intrusion(rect, c), 0);
+      return {
+        side: c.side,
+        shiftX: left - c.left,
+        shiftY: top - c.top,
+        score:
+          (offscreen ? 1e9 : 0) +
+          covered +
+          Math.abs(horizontal ? top - c.top : left - c.left) * 12 -
+          c.pref * 600,
+      };
+    })
+  );
+
+  return candidates.reduce((best, c) => (c.score < best.score ? c : best));
 }
 
 function TechItem({ tech, x, y, box, index, active, onToggle }) {
   const Icon = TECH_ICONS[tech.icon];
   const pointerType = useRef("");
+  const itemRef = useRef(null);
+  const cardRef = useRef(null);
+  const [place, setPlace] = useState({ side: "right", shiftX: 0, shiftY: 0 });
+
+  // Measured on the way in (hover, focus, tap) so it reflects the current
+  // viewport and scroll position.
+  const updatePlace = () => {
+    if (!itemRef.current || !cardRef.current) return;
+    const dx = (x - box.w / 2) / box.w;
+    const dy = (y - box.h / 2) / box.h;
+    setPlace(placeCard(itemRef.current, cardRef.current, dx, dy));
+  };
 
   return (
     <li
+      ref={itemRef}
       className="tech-item"
       data-active={active || undefined}
+      onPointerEnter={updatePlace}
+      onFocus={updatePlace}
       style={{
         left: `${(x / box.w) * 100}%`,
         top: `${(y / box.h) * 100}%`,
@@ -94,23 +177,35 @@ function TechItem({ tech, x, y, box, index, active, onToggle }) {
           onPointerDown={(e) => (pointerType.current = e.pointerType)}
           onClick={() => {
             // Mouse users get the hover flip; taps toggle it instead.
-            if (pointerType.current !== "mouse") onToggle();
+            if (pointerType.current !== "mouse") {
+              updatePlace();
+              onToggle();
+            }
             pointerType.current = "";
           }}
         >
           <span className="tech-inner">
             <span className="tech-front">{Icon && <Icon />}</span>
-            <span className="tech-back" data-align={alignFor(x, box.w)} aria-hidden="true">
-              <span className="tech-back-row">
-                <span className="tech-name">{tech.name}</span>
-                <span className="tech-level">{tech.level}%</span>
-              </span>
-              <span className="tech-bar">
-                <span className="tech-bar-fill" />
-              </span>
+            <span className="tech-back" aria-hidden="true">
+              {tech.level}%
             </span>
           </span>
         </button>
+      </div>
+      <div
+        ref={cardRef}
+        className="tech-card"
+        data-side={place.side}
+        style={{ "--shift-x": `${place.shiftX}px`, "--shift-y": `${place.shiftY}px` }}
+        aria-hidden="true"
+      >
+        <div className="tech-card-row">
+          <span className="tech-name">{tech.name}</span>
+          <span className="tech-level">{tech.level}%</span>
+        </div>
+        <span className="tech-bar">
+          <span className="tech-bar-fill" />
+        </span>
       </div>
     </li>
   );
@@ -147,7 +242,7 @@ function Letter({ label, box, track, slots, items, activeKey, setActiveKey, dela
   );
 }
 
-// Outline, dark body, faint teal tint and a dashed centre line, drawn as
+// Outline, dark body, faint blue tint and a dashed centre line, drawn as
 // stacked strokes of the same shape.
 function Track({ children }) {
   return (

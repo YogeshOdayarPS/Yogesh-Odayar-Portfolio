@@ -43,23 +43,23 @@ export const about = {
 //   O: clockwise from 12 o'clock.
 export const techStack = {
   Y: [
-    { name: "Java", icon: "java", level: 80 },
-    { name: "Python", icon: "python", level: 80 },
-    { name: "C", icon: "c", level: 65 },
-    { name: "JavaScript", icon: "javascript", level: 80 },
+    { name: "Java", icon: "java", level: 85 },
+    { name: "Python", icon: "python", level: 50 },
+    { name: "Cloud Computing", icon: "cloud", level: 65 },
+    { name: "JavaScript", icon: "javascript", level: 70 },
     { name: "HTML5", icon: "html5", level: 85 },
-    { name: "CSS3", icon: "css3", level: 80 },
-    { name: "React.js", icon: "react", level: 75 },
+    { name: "CSS3", icon: "css3", level: 85 },
+    { name: "React.js", icon: "react", level: 70 },
   ],
   O: [
-    { name: "Flutter", icon: "flutter", level: 70 },
-    { name: "Node.js", icon: "node", level: 75 },
-    { name: "MySQL", icon: "mysql", level: 75 },
-    { name: "Excel", icon: "excel", level: 75 },
-    { name: "Power BI", icon: "powerbi", level: 75 },
+    { name: "Machine Learning", icon: "ml", level: 35 },
+    { name: "Node.js", icon: "node", level: 65 },
+    { name: "MySQL", icon: "mysql", level: 70 },
+    { name: "Excel", icon: "excel", level: 70 },
+    { name: "PostgreSQL", icon: "postgresql", level: 70 },
     { name: "VS Code", icon: "vscode", level: 90 },
-    { name: "GitHub", icon: "github", level: 85 },
-    { name: "Git", icon: "git", level: 80 },
+    { name: "GitHub", icon: "github", level: 75 },
+    { name: "Git", icon: "git", level: 75 },
   ],
 };
 
